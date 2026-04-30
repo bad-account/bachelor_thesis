@@ -1,0 +1,45 @@
+\chapter{Testování a evaluace řešení}
+\label{sec:testing}
+
+Testování systému NPC probíhalo manuálně v rámci herní scény. 
+Cílem testování bylo ověřit, zda implementovaná chování odpovídá návrhu a zda jednotlivé mechanismy fungují v očekávaných situacích.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{0.28\textwidth}|p{0.42\textwidth}|p{0.18\textwidth}|}
+\hline
+\textbf{Scénář} & \textbf{Očekávané chování} & \textbf{Výsledek} \\
+\hline
+Přechody mezi stavy & NPC přechází mezi stavy \texttt{Passive}, \texttt{Investigating} a \texttt{Attacking}. & Ověřeno \\
+\hline
+Zraková percepce & Detekce hráče vede k přechodu do stavu \texttt{Attacking}. & Ověřeno \\
+\hline
+Ztráta vizuálního kontaktu & NPC se po ztrátě cíle vrací do pasivního chování. & Ověřeno \\
+\hline
+Sluchová percepce & Zvukový podnět vede k přechodu do stavu \texttt{Investigating}. & Ověřeno \\
+\hline
+Hlídkování NPC & NPC se pohybuje po přiřazené hlídkové trase. & Ověřeno \\
+\hline
+Změna hlídkové trasy & NPC po splnění podmínek změní aktuální trasu. & Ověřeno \\
+\hline
+Fázově řízené trasy & NPC upravují výběr tras podle fáze hry. & Ověřeno \\
+\hline
+Interakce s objekty & NPC dokáže interagovat s objekty (např. otevírání dveří). & Ověřeno \\
+\hline
+Sebrání předmětu & NPC dokáže sebrat interaktivní předmět (např. klíč). & Ověřeno \\
+\hline
+Položení předmětu & NPC po sebrání přesune předmět na jiné místo. & Ověřeno \\
+\hline
+Sdílení informací & NPC si předávají informace o předmětech. & Neověřeno \\
+\hline
+\end{tabular}
+\caption{Přehled manuálně ověřených scénářů}
+\label{tab:testovaci-scenare}
+\end{table}
+
+Z tabulky~\ref{tab:testovaci-scenare} vyplývá, že základní mechanismy systému fungují dle očekávání. 
+Byla ověřena zejména správná funkce percepce, přechodů mezi stavy a hlídkovacího chování NPC.
+
+Naopak některé pokročilejší části systému nebyly v rámci testování spolehlivě ověřeny. 
+Konkrétně se jedná o manipulaci s předměty po jejich sebrání a sdílení informací mezi NPC. 
+Tyto části proto nelze považovat za plně otestované a představují omezení aktuální implementace.

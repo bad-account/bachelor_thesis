@@ -1,0 +1,261 @@
+\chapter{Behaviorální stromy}
+
+Tato kapitola popisuje základní principy behaviorálních stromů a jejich využití při návrhu chování NPC. 
+Nejprve je vysvětleno, k čemu behaviorální stromy slouží a jakým způsobem se vykonávají. 
+Poté jsou popsány základní typy uzlů, ze kterých se skládají. 
+Závěr kapitoly shrnuje hlavní výhody a omezení tohoto přístupu s ohledem na návrh chování postav v UE5.
+
+\section{Úloha behaviorálních stromů}
+
+Behaviorální strom je způsob zápisu rozhodovací logiky autonomního agenta. 
+V oblasti počítačových her se tímto agentem obvykle rozumí NPC, která na základě aktuální situace vybírá vhodné chování. 
+Může například procházet herní prostředí, reagovat na hráče, komunikovat s jinou postavou nebo provádět interakce s objekty v herním prostředí.
+
+Základní myšlenkou behaviorálního stromu je rozdělit chování na menší části. 
+Místo jedné rozsáhlé podmínkové struktury je rozhodování popsáno pomocí uzlů uspořádaných do stromu. 
+Některé uzly určují pořadí vyhodnocování, jiné ověřují podmínky a další vykonávají konkrétní akce. 
+Díky tomu je možné složitější chování sestavit z jednodušších a lépe oddělených částí.\cite[s.~6]{colledanchise2018}
+
+Tento způsob návrhu je vhodný zejména pro herní umělou inteligenci, protože chování postav musí být často reaktivní. 
+Postava se nemůže rozhodnout pouze jednou a poté pokračovat bez ohledu na změny okolí. 
+Naopak musí průběžně reagovat na pohyb hráče, změnu stavu objektů, dostupnost cesty nebo výsledek právě prováděné akce. 
+Behaviorální strom umožňuje takové změny zachytit opakovaným vyhodnocováním rozhodovací logiky.\cite[s.~5]{colledanchise2018}
+
+V této práci jsou behaviorální stromy důležité především proto, že představují hlavní prostředek pro řízení chování NPC v UE5. 
+Pomocí nich lze jednotlivé typy chování oddělit do samostatných větví a následně určit, za jakých podmínek se mají spouštět.
+
+\section{Základní princip vykonávání}
+
+Behaviorální strom se vykonává od kořenového uzlu. 
+Z něj je v pravidelných intervalech vysílán signál označovaný jako \textit{tick}. 
+Tento signál postupuje stromem podle pravidel jednotlivých uzlů. 
+Uzel je tedy vyhodnocen pouze tehdy, pokud k němu \textit{tick} dorazí.\cite[s.~6]{colledanchise2018}
+
+Každý uzel po vyhodnocení vrací svému rodiči výsledek. 
+V běžném pojetí behaviorálních stromů se používají tři základní návratové stavy. 
+Stav \textit{Success} znamená, že uzel byl úspěšně dokončen. Stav \textit{Failure} vyjadřuje, že uzel nemohl svůj úkol splnit. 
+Stav \textit{Running} se používá v případě, kdy akce stále probíhá a její výsledek zatím není známý.\cite[s.~9, tab.~1.1]{colledanchise2018}
+
+Tyto návratové stavy tvoří základ komunikace mezi jednotlivými částmi stromu. 
+Například akce přesunu na určité místo většinou nemůže skončit během jediného snímku hry. 
+Dokud se postava pohybuje k cíli, uzel může vracet stav \textit{Running}. 
+Jakmile je cíl dosažen, vrátí \textit{Success}. 
+Pokud se cestu nepodaří najít, výsledek bude \textit{Failure}.
+
+Opakované vyhodnocování stromu umožňuje postavě reagovat na aktuální stav hry. 
+Pokud se například během pohybu změní podmínky v okolí, může být při dalším vyhodnocení zvolena jiná větev. 
+Tím se behaviorální strom liší od jednoduchého skriptu, který pouze provede předem danou posloupnost příkazů bez průběžného přehodnocování situace.\cite[s.~9]{colledanchise2018}
+
+\section{Struktura behaviorálního stromu}
+Behaviorální strom je tvořen uzly, které jsou mezi sebou propojeny vztahem rodič--potomek. 
+Výjimkou je kořenový uzel, který má vazby pouze na své potomky. 
+Kořenový uzel stojí na začátku vyhodnocování a jednotlivé větve stromu popisují možné části chování.\cite[s.~6, kap.~1.3]{colledanchise2018}
+
+Z pohledu struktury se uzly dělí do tří kategorií: kompozitní, dekorátorové a listové. 
+Kompozitní uzly řídí tok vykonávání a určují, v jakém pořadí a za jakých podmínek se budou potomci vyhodnocovat. 
+Dekorátorové uzly mají právě jednoho potomka a modifikují jeho chování nebo návratový stav. 
+Listové uzly se nacházejí na koncích větví a představují buď podmínkové ověření stavu, nebo konkrétní akci. 
+Podrobný popis každé kategorie je uveden v sekci \ref{sec:behavior_tree_node_types}.
+
+Kompozitní uzly neurčují konkrétní akci ve světě hry, ale rozhodují o tom, která část stromu bude vyhodnocena. 
+Typicky určují pořadí potomků nebo vybírají první větev, jejíž podmínky jsou splněny. 
+Díky nim lze ve stromu vyjádřit například prioritu jednotlivých chování.
+
+Podmínkové listové uzly slouží k ověření určitého stavu. 
+V herním prostředí může jít například o kontrolu, zda postava vidí hráče, zda je v dosahu objekt, nebo jestli existuje platný cíl pohybu. 
+
+Akční listové uzly představují samotné činnosti postavy. 
+Mohou spustit pohyb, vybrat nový cíl, změnit hodnotu v \textit{Blackboard}, přehrát animaci nebo provést interakci s objektem. 
+V UE5 jsou pro tyto části používány především uzly typu \textit{Task}.\cite[s.~76]{butler2023}
+
+\section{Základní typy uzlů}
+\label{sec:behavior_tree_node_types}
+
+\subsection{Kompozitní uzly}
+
+\textit{Kompozitní} uzly jsou řídicí uzly, které mají jednoho nebo více potomků. 
+Jejich úlohou je určit, v jakém pořadí a za jakých podmínek se budou potomci vyhodnocovat. 
+Mezi nejčastěji používané \textit{Kompozitní} uzly patří \textit{Sequence} a \textit{Selector} (v literatuře též zvaný jako \textit{Fallback}). 
+V některých systémech se používá také uzel \textit{Parallel}.\cite[s.~6--7]{colledanchise2018}
+
+\subsubsection{Sequence}
+
+Uzel \textit{Sequence} slouží k postupnému vykonání několika kroků. 
+Vyhodnocuje své potomky zleva doprava a pokračuje pouze tehdy, pokud předchozí potomek skončil úspěchem. 
+Pokud některý potomek vrátí stav \textit{Failure}, selže celá sekvence. 
+Pokud potomek vrátí \textit{Running}, znamená to, že daný krok ještě probíhá, a stejný stav vrací také celá sekvence.
+Uzel \textit{Sequence} vrací návratovou hodnotu \textit{Success} pouze v tom případě, když všichni potomci tohoto uzlu mají návratovou hodnotu \textit{Success}.~\cite[s.~6]{colledanchise2018}
+
+Tento uzel je vhodný pro chování, u kterého musí být splněno více kroků v přesném pořadí. 
+Příkladem může být interakce NPC s předmětem. 
+Postava nejprve ověří, zda je předmět dostupný, poté se k němu přesune a nakonec provede samotnou akci. 
+Pokud už první podmínka není splněna, nemá smysl pokračovat v dalších krocích.
+
+\subsubsection{Selector}
+
+Uzel \textit{Selector} slouží k výběru první vhodné možnosti. 
+Stejně jako \textit{Sequence} prochází své potomky zleva doprava, ale používá opačnou logiku. 
+Jakmile některý potomek uspěje nebo stále probíhá, \textit{Selector} se zastaví a vrátí odpovídající stav. 
+Selže pouze tehdy, když selžou všichni jeho potomci.~\cite[s.~7]{colledanchise2018}
+
+\textit{Selector} se často používá pro vyjádření priorit. 
+První větev může například popisovat reakci na hráče, druhá komunikaci s jinou postavou a třetí běžné pohybování po scéně. 
+Strom se nejdříve pokusí vykonat chování s nejvyšší prioritou. 
+Pokud pro něj nejsou splněny podmínky, pokračuje k další možnosti.
+
+\subsubsection{Parallel}
+
+Uzel \textit{Parallel} umožňuje vyhodnocovat více potomků současně.
+Používá se v případech, kdy má agent provádět více činností najednou nebo kdy má během jedné akce průběžně sledovat další podmínku.
+Chování uzlu je řízeno dvěma parametry: $N$ označuje celkový počet přímých potomků a $M$ je konfigurovatelný práh úspěchu ($1 \leq M \leq N$). 
+Uzel vrátí stav \textit{Success}, pokud alespoň $M$ potomků uspěje, a stav \textit{Failure}, pokud více než $N - M$ potomků selže dříve, než je práh $M$ dosažen.\cite[s.~7]{colledanchise2018}
+
+V UE5 existuje uzel \textit{Simple Parallel}. 
+Ten umožňuje spustit hlavní úlohu a vedle ní vyhodnocovat další větev stromu.\cite[s.~76]{butler2023} 
+Prakticky může jít například o~situaci, kdy se postava přesouvá k cíli a zároveň kontroluje, zda se nezměnil stav okolí.
+
+\subsection{Dekorátorové uzly}
+\label{subsec:decorators}
+
+Dekorátorové uzly představují speciální typ řídicích uzlů, které mají právě jednoho potomka a slouží k úpravě jeho chování nebo návratového stavu.\cite[s.~8--9]{colledanchise2018}
+Na rozdíl od ostatních řídicích uzlů, které určují tok vykonávání mezi více potomky, dekorátory modifikují výsledek nebo podmínky vykonání jediné podřízené větve.
+
+V obecné teorii behaviorálních stromů mohou dekorátory například měnit návratové hodnoty uzlů (např. převrácení výsledku \textit{Success} na \textit{Failure}) 
+nebo ovlivňovat způsob vykonávání, například omezením počtu opakování určité akce.\cite[s.~9]{colledanchise2018}
+
+V prostředí UE5 mají dekorátory poněkud odlišnou vizuální strukturu. 
+Jsou obvykle připojeny ke konkrétní větvi stromu a slouží především jako podmínky určující, zda může být daná větev vykonána.\cite[s.~93]{butler2023}
+Nemají tedy vlastní samostatný vizuální uzel, jako tomu je u ostatních uzlů.
+Typickým příkladem je kontrola hodnoty uložené v \textit{Blackboard}. 
+Pokud je například dostupná reference na hráče, může se vykonat větev popisující reakci na hráče. 
+V opačném případě je tato větev přeskočena a strom pokračuje jinou alternativou.
+
+\subsection{Listové uzly}
+
+Listové uzly se nacházejí na koncích větví behaviorálního stromu a nemají žádné potomky. 
+Jejich úkolem je buď ověřit určitý stav, nebo provést konkrétní akci.\cite[s.~6]{colledanchise2018}
+
+Podmínkové uzly kontrolují stav prostředí nebo interních dat postavy. 
+Mohou například ověřit, zda je hráč v dosahu, zda je dostupný objekt pro interakci nebo zda postava již dokončila předchozí úkol. 
+Výsledkem takového uzlu je zpravidla stav \textit{Success} nebo \textit{Failure}.\cite[s.~8]{colledanchise2018}
+Stav \textit{Running} se u podmínkového uzlu nevyskytuje kvůli rozhodovací podstatě tohoto uzlu.
+
+Akční uzly vykonávají konkrétní činnost. 
+V UE5 se jedná zejména o uzly typu \textit{Task}. 
+Ty mohou například spustit přesun pomocí navigačního systému, vybrat náhodný bod ve scéně, změnit hodnotu v \textit{Blackboard} 
+nebo zavolat funkci implementovanou v \textit{Blueprint} či C++ třídě. 
+Právě akční uzly propojují rozhodovací logiku behaviorálního stromu se skutečným chováním postavy ve hře.
+
+Přehled návratových stavů všech popsaných typů uzlů je uveden v~tabulce~\ref{tab:BehaviorTreeNodeTypes}.
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\fboxsep}{3pt}
+\setlength{\fboxrule}{0.5pt}
+
+\begin{tabularx}{\textwidth}{l c X X X}
+\hline
+\textbf{Typ uzlu} & \textbf{Symbol} & \textbf{Success} & \textbf{Failure} & \textbf{Running} \\
+\hline
+Selector & \fbox{?} & Pokud alespoň jeden potomek uspěje & Pokud všichni potomci selžou & Pokud alespoň jeden potomek vrátí Running \\
+\hline
+Sequence & \fbox{$\rightarrow$} & Pokud všichni potomci uspějí & Pokud alespoň jeden potomek selže & Pokud alespoň jeden potomek vrátí Running \\
+\hline
+Parallel & \fbox{$\rightrightarrows$} & Pokud $\geq M$~potomků uspěje & Pokud $> N - M$~potomků selže & V ostatních případech \\
+\hline
+Action & \fbox{text} & Po dokončení & Pokud nelze dokončit & Během provádění \\
+\hline
+Condition & \btboxround{text} & Pokud platí (true) & Pokud neplatí (false) & Nikdy \\
+\hline
+Decorator & $\diamond$ & Vlastní definice & Vlastní definice & Vlastní definice \\
+\hline
+\end{tabularx}
+
+\caption{Typy uzlů v behaviorálním stromě.
+Přeloženo podle~\cite[s.~9, tab.~1.1]{colledanchise2018}.}
+\label{tab:BehaviorTreeNodeTypes}
+\end{table}
+
+Výše uvedená tabulka popisuje, jak fungují návratové hodnoty jednotlivých typů uzlů, ale neméně důležité je jejich vzájemné uspořádání ve stromě. 
+Následující diagram ukazuje, jak lze popsané uzly kombinovat na konkrétním příkladu.
+
+\begin{figure}[H]
+\centering
+\begin{forest}
+  for tree={
+    draw, rectangle, align=center, text centered,
+    minimum width=3cm, minimum height=0.8cm,
+    text width=2.8cm, font=\small,
+    s sep=3mm, l sep=20mm,
+    edge={-stealth}, anchor=north, inner sep=4pt,
+  }
+  [{ROOT}, fill=gray!30
+    [{Selector~(?)}, fill=gray!15
+      [{Sequence~($\rightarrow$)}, fill=gray!10
+        [{Je hráč\\viditelný?},
+            draw, rounded corners=6pt, align=center,
+            text width=2.4cm, fill=orange!20]
+        [{Uprav chování\\dle postupu\\hráče}]
+      ]
+      [{Sequence~($\rightarrow$)}, fill=gray!10
+        [{Je v dosahu\\jiné NPC?},
+            draw, rounded corners=6pt, align=center,
+            text width=2.4cm, fill=orange!20]
+        [{Zahaj komunikaci\\s~NPC}]
+      ]
+      [{Přesuň\\předmět}]
+    ]
+  ]
+\end{forest}
+\caption{Zjednodušená struktura behaviorálního stromu pro NPC.}
+\label{fig:bt_npc_example}
+\end{figure}
+
+Obrázek~\ref{fig:bt_npc_example} znázorňuje, jak lze tři navrhovaná chování přirozeně uspořádat do jediného stromu. 
+Uzel \textit{Selector} prochází větve zleva doprava a zkouší vždy chování s nejvyšší prioritou. 
+Nejprve se pokusí o adaptaci vůči hráči. 
+Podmínka viditelnosti hráče musí být splněna, aby se \textit{Sequence} vykonala.
+Pokud hráč není viditelný, strom přejde na komunikaci s jiným NPC.
+Není-li ani to možné, vykoná se výchozí chování, kterým je přesun předmětu. 
+Tato větev nemá podmínku, takže k ní Selector vždy dojde. 
+Uzel může skončit úspěchem i selháním podle toho, jak skončí daná akce.
+
+
+\section{Výhody behaviorálních stromů}
+
+Jednou z hlavních výhod behaviorálních stromů je modularita. 
+Chování lze rozdělit do menších částí, které mají jasně určenou odpovědnost. 
+Jedna větev může řešit pohyb, jiná reakci na hráče a další například komunikaci mezi postavami. 
+Pokud jsou tyto části navrženy obecně, lze je později použít i v jiném chování nebo u jiné postavy.\cite[s.~38]{colledanchise2018}
+
+Další výhodou je přehlednost. 
+Stromová struktura umožňuje sledovat, jakým způsobem se postava rozhoduje. 
+To je užitečné zejména v UE5, kde lze behaviorální strom vytvářet a upravovat v grafickém editoru. 
+Vývojář tak nemusí procházet rozsáhlý zdrojový kód, ale může pracovat s vizuální reprezentací jednotlivých větví.\cite[s.~38]{colledanchise2018}
+
+Důležitá je také reaktivita. 
+Protože se strom vyhodnocuje opakovaně, může postava reagovat na změny prostředí. 
+Pokud se například během běžného pohybu objeví hráč, může strom při dalším vyhodnocení přejít do větve s vyšší prioritou. 
+Díky tomu chování nepůsobí pouze jako pevně připravená posloupnost příkazů, ale může se přizpůsobovat aktuální situaci.\cite[s.~38]{colledanchise2018}
+
+Behaviorální stromy také podporují postupný vývoj. 
+Na začátku může být strom jednoduchý a obsahovat pouze několik základních větví. 
+Později lze přidávat další podmínky, akce a reakce, aniž by bylo nutné přepsat celý systém rozhodování. 
+To je výhodné při vývoji herní umělé inteligence, protože chování postav se často upravuje podle výsledků testování.\cite[s.~38]{colledanchise2018}
+
+\section{Omezení behaviorálních stromů}
+
+Behaviorální stromy mají také určitá omezení. 
+U rozsáhlých stromů může postupně klesat přehlednost, zejména pokud nejsou jednotlivé větve vhodně pojmenované nebo pokud se v nich opakuje podobná logika. 
+V takovém případě může být obtížné zjistit, proč postava zvolila právě určité chování.
+
+Dalším problémem může být špatně navržené pořadí větví. 
+Uzel \textit{Selector} upřednostňuje potomky podle jejich pořadí. 
+Pokud je důležitá větev umístěna příliš nízko, strom se k ní nemusí dostat, protože dříve uspěje jiná možnost. 
+Chyba tedy nemusí být v samotné akci, ale ve struktuře rozhodování.
+
+Behaviorální strom také vyžaduje průběžné vyhodnocování podmínek. 
+U menšího počtu postav to obvykle nepředstavuje problém, ale u většího množství agentů nebo složitějších podmínek může být nutné řešit výkon. 
+Při návrhu stromu je proto vhodné zvážit, které kontroly je nutné provádět často a které lze vyhodnocovat méně pravidelně.\cite[s.~42]{colledanchise2018}
+

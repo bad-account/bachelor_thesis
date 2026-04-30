@@ -4,41 +4,65 @@
 \usepackage[autostyle=true,czech=quotes]{csquotes} % korektni sazba uvozovek, podpora pro balik biblatex
 \usepackage[backend=biber, style=iso-numeric, alldates=iso]{biblatex} % bibliografie
 \usepackage{dcolumn} % sloupce tabulky s ciselnymi hodnotami
-\usepackage{subfig} % makra pro "podobrazky" a "podtabulky"
+%\usepackage{subfig} % makra pro "podobrazky" a "podtabulky"
 \usepackage[cpp]{diplomalst}
 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs} 
+\usepackage{float}
+\usepackage{tcolorbox}
+\usepackage[edges]{forest}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{pdflscape}
+\usepackage{dirtree}
+
+\newtcbox{\btboxround}{
+  on line,
+  colback=white,
+  colframe=black,
+  boxrule=0.5pt,
+  arc=3pt,
+  boxsep=0pt,
+  left=2pt,
+  right=2pt,
+  top=2pt,
+  bottom=2pt
+}
+
+
 % Zadame pozadovane vstupy pro generovani titulnich stran.
-\ThesisAuthor{Jiří Dvorský}
+\ThesisAuthor{Roman Kratochvíl}
 
-\ThesisSupervisor{doc. Ing. Jan Novák, Ph.D.}
+\ThesisSupervisor{Ing. Jakub Beránek}
 
-\CzechThesisTitle{Ukázka sazby kvalifikační práce}
+\CzechThesisTitle{Využití behaviorálních stromů v Unreal Engine 5}
 
-\EnglishThesisTitle{Diploma Thesis Typesetting Demo}
+\EnglishThesisTitle{Impementing Behavioral Trees in Unreal Engine 5}
 
-\SubmissionYear{2016}
+\SubmissionYear{2026}
 
-\ThesisAssignmentFileName{FictiveThesisAssignment.pdf}
+\ThesisAssignmentFileName{ThesisAssignment.pdf}
 
 % Pokud nechceme nikomu dekovat makro zapoznamkujeme.
 \Acknowledgement{Rád bych na tomto místě poděkoval všem, kteří mi s prací pomohli, protože bez nich by tato práce nevznikla.}
 
-\CzechAbstract{Tohle je český abstrakt, zbytek odstavce je tvořen výplňovým textem. Naší si rozmachu potřebami s posílat v poskytnout ty má plot. Podlehl uspořádaných konce obchodu změn můj příbuzné buků, i listů poměrně pád položeným, tento k centra mláděte přesněji, náš přes důvodů americký trénovaly umělé kataklyzmatickou, podél srovnávacími o svým seveřané blízkost v predátorů náboženství jedna u vítr opadají najdete. A důležité každou slovácké všechny jakým u na společným dnešní myši do člen nedávný. Zjistí hází vymíráním výborná.}
+\CzechAbstract{Tato bakalářská práce se zabývá využitím behaviorálních stromů pro implementaci chování nehrajících postav (NPC) v prostředí Unreal Engine 5 (UE5). Cílem práce je analyzovat principy behaviorálních stromů, porovnat je s jinými metodami implementace NPC a demonstrovat jejich praktické použití na vzorové hře. Práce se zaměřuje na návrh a realizaci netriviálního chování NPC, zahrnujícího například dynamickou interakci s prostředím, reakce na hráče a spolupráci mezi NPC. Součástí práce je dokumentace principů behaviorálních stromů, návrh několika typů chování, jejich implementace ve vzorové hře a využití verzovacího systému při vývoji.}
 
-\CzechKeywords{typografie; \LaTeX; diplomová práce}
+\CzechKeywords{behaviorální stromy, nehrající postavy, Unreal Engine 5, chování NPC, verzovací systém}
 
-\EnglishAbstract{This is English abstract. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. Aenean placerat. Vivamus ac leo pretium faucibus. Duis risus. Fusce consectetuer risus a nunc. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Aliquam erat volutpat. Donec vitae arcu. Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Vestibulum fermentum tortor id mi. Etiam bibendum elit eget erat. Pellentesque pretium lectus id turpis. Nulla quis diam.}
+\EnglishAbstract{This bachelor’s thesis explores the use of behavioral trees for implementing non-player character (NPC) behavior within the Unreal Engine 5 (UE5) framework. The aim is to analyze the principles of behavioral trees, compare them with other NPC behavior implementation techniques, and demonstrate their practical application in a prototype game. The thesis focuses on designing and implementing complex NPC behaviors, including dynamic interaction with the environment, responses to player actions, and collaboration among NPCs. The work includes documentation of the principles of behavioral trees, the design of several behavior types, their implementation in a prototype game, and the use of a version control system during development.}
 
-\EnglishKeywords{typography; \LaTeX; master thesis}
+\EnglishKeywords{behavioral trees, non-player characters, Unreal Engine 5, NPC behavior, version control system}
 
-\AddAcronym{DVD}{Digital Versatile Disc}
-\AddAcronym{TNT}{Trinitrotoluen}
-\AddAcronym{UML}{Unified Modeling Language}
-\AddAcronym{HTML}{Hyper Text Markup Language}
-\AddAcronym{TUG}{\TeX{} Users Group}
+\AddAcronym{UE5}{Unreal Engine 5}
+\AddAcronym{NPC}{Non-playing character}
 
-\addbibresource{biblatex-examples.bib}
-\addbibresource{coffee.bib}
+\addbibresource{sources.bib}
 
 % Novy druh tabulkoveho sloupce, ve kterem jsou cisla zarovnana podle desetinne carky
 \newcolumntype{d}[1]{D{,}{,}{#1}}
@@ -61,22 +85,25 @@
 \clearpage
 
 % A nasleduje text zaverecne prace.
-\input{Chapters/Introduction.tex}
-\input{Chapters/SampleChapter1.tex}
-\input{Chapters/SampleChapter2.tex}
-\input{Chapters/TechnicalDetails.tex}
-\input{Chapters/Conclusion.tex}
+\input{Chapters/1_Introduction.tex}
+\input{Chapters/2_BehaviorTrees.tex}
+\input{Chapters/3_UE5AI.tex}
+\input{Chapters/4_BehaviorDesign.tex}
+\input{Chapters/5_Implementation.tex}
+\input{Chapters/6_Testing.tex}
+\input{Chapters/7_Conclusion.tex}
+
 
 % Seznam literatury
 \printbibliography[title={Literatura}, heading=bibintoc]
 
 % Prilohy
 \appendix
-\input{Chapters/Appendix1.tex}
-\input{Chapters/Appendix2.tex}
+\input{Chapters/8_Appendix1.tex}
+\input{Chapters/9_Appendix2.tex}
 
 % Priloha vlozena primo do hlavniho LaTeX souboru. Ne vsechny prilohy je nutne mit ve zvlastnich souborech.
-\chapter{Dlouhý zdrojový kód}
-\lstinputlisting[label=src:CppExternal,caption={Dlouhý zdrojový kód v jazyce C++ načtený s externího souboru}]{SourceCodes/ArraySortingAlgorithms.cpp}
+%\chapter{Dlouhý zdrojový kód}
+%\lstinputlisting[label=src:CppExternal,caption={Dlouhý zdrojový kód v jazyce C++ načtený s externího %souboru}]{SourceCodes/ArraySortingAlgorithms.cpp}
 
 \end{document}

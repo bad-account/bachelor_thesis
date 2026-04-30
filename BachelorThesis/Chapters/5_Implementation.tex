@@ -1,0 +1,387 @@
+\chapter{Implementace systému NPC}
+\label{sec:implementace}
+
+Implementace byla rozdělena do několika navazujících částí. 
+Nejprve je popsána realizace základní třídy NPC a jejích odvozených variant, poté implementace AI Controlleru, Blackboardu a behaviorálního stromu. 
+Následující části se věnují konkrétním Taskům a Services, správě hlídkových tras, zpracování percepčních podnětů a komunikaci mezi NPC. 
+Závěr kapitoly shrnuje vybraná implementační rozhodnutí a problémy, které bylo nutné při vývoji řešit. 
+
+\section{Implementace BP\_NPC}
+\label{sec:implementace-bp-npc}
+
+Třída \texttt{BP\_NPC} je odvozena od třídy \texttt{BP\_ThirdPersonCharacter} a představuje základní implementaci všech nehráčských postav ve hře. 
+Jejím hlavním účelem je realizace konkrétních akcí ve světě, zatímco rozhodovací logika je delegována na AI Controller a behaviorální strom. 
+Třída tak slouží především jako vykonavatel příkazů generovaných vyššími vrstvami systému.
+
+V rámci třídy jsou implementovány základní mechaniky pohybu, animací, útoku a interakcí s okolím. 
+Aktualizace stavových proměnných souvisejících s pohybem probíhá periodicky v rámci události \texttt{Tick}, kde je z komponenty \texttt{CharacterMovement} získána aktuální rychlost postavy. 
+Její velikost je následně ukládána do proměnné \texttt{Speed}, která slouží jako vstup pro animační systém. 
+Současně je pomocí funkce \texttt{IsFalling} určováno, zda se postava nachází ve vzduchu, a výsledek je ukládán do proměnné \texttt{IsJumping}. 
+Tyto proměnné umožňují animačnímu blueprintu plynule přepínat mezi jednotlivými animačními stavy.
+
+Útočné chování je realizováno prostřednictvím vlastní události \texttt{Attack}, která je volána z behaviorálního stromu, k čemuž slouží \textit{task} \texttt{BTT\_Attack}. 
+Po jejím spuštění je nastavena proměnná \texttt{IsAttacking} a přehrána odpovídající animační montáž pomocí uzlu \texttt{Play Montage}. 
+Po dokončení nebo přerušení animace je proměnná \texttt{IsAttacking} opět resetována. 
+Za povšimnutí stojí systém notifikací. V rámci animace (respektivě animační montáže) může vývojář vložit události na konkrétní snímky 
+animace, čímž je mu dovoleno velmi flexibilně ovlivňovat dění v herním světě v průběhu animace.
+Pro využití systému notifikací stačí vložit notifikaci na časové ose animace a zvolit buď jeden z předpřipravených 
+událostí (např. \textit{Play Sound}), nebo vlastní událost, jak jde vidět na obrázku~\ref{fig:notify_timeline}.
+Obrázek \ref{fig:notify_blueprint} poté ukazuje, jak taková událost může být implementována.
+Tato konkrétní událost při zásahu hráče teleportuje hráče zpátky na \texttt{PlayerStart} (začátek levelu).
+
+\begin{figure}[H]
+    \centering
+
+    \includegraphics[width=\textwidth]{Figures/AN_OnHitEvent.png}
+    \caption{Umístění události \texttt{AN\_HitEvent} v animační montáži}
+    \label{fig:notify_timeline}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+
+    \includegraphics[width=\textwidth]{Figures/AN_OnHitEventBlueprint.png}
+    \caption{Implementace události \texttt{AN\_HitEvent} v blueprintu}
+    \label{fig:notify_blueprint}
+\end{figure}
+
+Manipulace se zbraní je řešena pomocí dvojice událostí \texttt{EquipWeapon} a \texttt{UnequipWeapon}. 
+Událost \texttt{EquipWeapon} přehrává animační montáž tasení zbraně a následně vytváří instanci zbraně pomocí \texttt{SpawnActor}. 
+Vytvořený objekt je připojen ke kostře postavy na konkrétní socket. 
+Reference na vytvořenou zbraň je uložena do proměnné \texttt{WeaponActor} a příznak \texttt{IsWieldingWeapon} indikuje, že postava aktuálně drží zbraň. 
+Opačný proces je implementován v události \texttt{UnequipWeapon}, kde je zbraň odpojena a odstraněna.
+
+Interakce s okolními objekty je realizována prostřednictvím kolizního systému. 
+Při vstupu do kolize s objektem implementujícím rozhraní \texttt{BPI\_Interactible} je tato skutečnost detekována v události \texttt{OnComponentBeginOverlap}. 
+Následně je získán AI Controller dané postavy a prostřednictvím jeho rozhraní je aktualizována odpovídající hodnota v Blackboardu, čímž je behaviorálnímu stromu signalizována možnost interakce. 
+Při ukončení kolize (\texttt{OnComponentEndOverlap}) je tato informace opět odstraněna.
+
+Třída dále obsahuje pomocnou funkci \texttt{SetMovementSpeed}, která na základě hodnoty výčtového typu nastavuje maximální rychlost pohybu postavy. 
+
+Konkrétní postavy \texttt{BP\_Grandpa} a \texttt{BP\_Granny} dědí z třídy \texttt{BP\_NPC} a upravují především vizuální reprezentaci a animační parametry. 
+Sdílená logika chování zůstává v třídě rodiče, čímž je minimalizována duplicita a zjednodušena případná rozšiřitelnost systému.
+
+\section{Implementace AI Controlleru (IAC\_NPC)}
+\label{sec:implementace-iac-npc}
+
+Třída \texttt{IAC\_NPC}, odvozená od~\texttt{AIController}, představuje hlavní řídicí komponentu NPC. 
+Jejím úkolem je zprostředkovat komunikaci mezi percepčním systémem, behaviorálním stromem a herním světem, a zároveň udržovat aktuální stav 
+postavy prostřednictvím \textit{blackboardu}.
+
+\subsection{Inicializace a napojení na behaviorální strom}
+
+Po převzetí řízení nad postavou (událost \texttt{OnPossess}) dochází k inicializaci celého systému.
+Nejprve jsou vyhledány všechny instance tříd reprezentujících hlídkové trasy a uloženy do interní kolekce.
+Tento krok umožňuje dynamicky reagovat na změny ve scéně bez nutnosti pevného navázání tras v editoru.
+
+Následně je spuštěn behaviorální strom \texttt{BT\_NPC}, přičemž před jeho spuštěním jsou do \textit{blackboardu}
+zapsány výchozí hodnoty. Jedná se zejména o:
+\begin{itemize}
+    \item referenci na řízenou postavu (\texttt{SelfActor}),
+    \item pravděpodobnost změny hlídkové trasy,
+    \item pravděpodobnost interakce s objektem,
+    \item počáteční hlídková trasa.
+\end{itemize}
+
+Inicializační fáze tak zajišťuje, že behaviorální strom pracuje nad konzistentní sadou dat a může okamžitě začít rozhodovací proces.
+
+\subsection{Zpracování percepce}
+
+Pro vytvoření dojmu smyslového vnímání u NPC se využívá komponenta \texttt{AIPerception}, která agreguje informace o okolních aktérech
+a vyvolává událost \texttt{OnTargetPerceptionUpdated} při každé změně percepčního stavu.
+
+Zpracování této události probíhá tak, že pro každý aktualizovaný aktér jsou získána
+percepční data, jednotlivé podněty jsou analyzovány podle typu smyslu
+a na základě výsledku jsou následně aktualizovány klíče v \textit{blackboardu}.
+
+Pro rozlišení typu podnětu je využita pomocná metoda \texttt{CanSenseActor}, jejíž implementace 
+je zobrazena na obrázku~\ref{fig:can_sense_actor}.
+Metoda nejprve získá percepční data pro daného aktéra pomocí uzlu \texttt{Get Actors Perception}. 
+Tato data jsou následně rozložena na jednotlivé stimuly, ze kterých se percepční informace skládá.
+
+Následně je ověřeno, zda některý ze stimulů odpovídá požadovanému typu smyslu.
+
+Pokud dojde ke shodě typů, metoda vrací informaci o úspěšném zaznamenání podnětu spolu s odpovídajícím stimulem. 
+V opačném případě pokračuje vyhodnocování dalších stimulů, dokud není nalezen odpovídající podnět
+nebo není seznam vyčerpán.
+
+Pro obě NPC je nastaven zrak (\texttt{AISense\_Sight}) jako dominantní smysl.
+Dominance vjemu znamená, že pokud je v rámci jedné aktualizace percepce
+zaznamenáno více podnětů současně, je prioritně vyhodnocován právě tento smysl.
+
+\begin{figure}[H]
+    \centering
+
+    \includegraphics[width=\textwidth]{Figures/CanSenseActor.png}
+    \caption{Implementace metody CanSenseActor}
+    \label{fig:can_sense_actor}
+\end{figure}
+
+
+\subsubsection{Zrakové podněty}
+
+Zrakové podněty jsou zpracovávány funkcí \texttt{HandleSensedSight}, která navazuje na funkci \texttt{CanSenseActor}. 
+Tato funkce přijímá referenci na detekovaného aktéra a hodnotu určující, zda byl aktér aktuálně úspěšně zaznamenán. 
+Na rozdíl od sluchového podnětu zde nestačí pouze uložit polohu stimulu, protože zrak může detekovat různé typy objektů s odlišným významem pro chování NPC.
+
+Prvním krokem je ověření, zda je detekovaným aktérem hráč. 
+Pokud ano a podnět je úspěšně zaznamenán, funkce zjistí aktuální stav NPC pomocí \texttt{GetCurrentState}. 
+Nenachází-li se NPC ve stavu \texttt{Attacking}, je zavolána funkce \texttt{SetStateAsAttacking}. 
+Ta zapíše referenci na hráče do klíče \texttt{AttackTarget} a nastaví klíč \texttt{State} na hodnotu \texttt{Attacking}. 
+Tím je behaviorálnímu stromu předána informace, že má přejít do větve útočného chování.
+
+Druhou částí zpracování zrakového podnětu je práce s interaktivními objekty. 
+Funkce ověřuje, zda detekovaný aktér implementuje rozhraní \texttt{BPI\_Interactible}. 
+Pokud ano, je porovnán s hodnotou aktuálně uloženou v klíči \texttt{SeenInteractible}. 
+V případě platného nově zaznamenaného objektu je reference na tento objekt uložena do \textit{blackboardu}. 
+Pokud naopak NPC daný objekt již nezaznamenává a tento objekt odpovídá aktuálně uložené hodnotě, je klíč \texttt{SeenInteractible} vymazán.
+
+Tato logika umožňuje, aby jeden percepční mechanismus sloužil jak pro reakci na hráče, tak pro průběžné sledování objektů, se kterými může NPC později interagovat. 
+Rozhodnutí, zda s objektem skutečně interagovat, však není provedeno přímo v AI Controlleru, ale až v příslušné části behaviorálního stromu.
+
+
+\subsubsection{Sluchové podněty}
+
+Sluchové podněty jsou zpracovávány funkcí \texttt{HandleSensedSound}. 
+Oproti zrakovým podnětům je tato část implementace jednodušší, protože zvukový podnět je reprezentován pouze polohou, nikoliv konkrétním cílovým aktérem.
+
+Funkce nejprve zjistí aktuální stav NPC pomocí \texttt{GetCurrentState}. 
+Pokud se postava nenachází ve stavu \texttt{Investigating}, je zavolána funkce \texttt{SetStateAsInvestigating}. 
+Ta nastaví klíč \texttt{State} na hodnotu \texttt{Investigating} a uloží polohu zvukového podnětu do klíče \texttt{PointOfInterest}. 
+Behaviorální strom tak při dalším vyhodnocení přejde do větve vyšetřování a NPC se přesune k místu, odkud byl podnět zaznamenán.
+
+Pokud se NPC nachází ve stavu \texttt{Attacking}, ke změně na vyšetřovací stav nedochází. 
+Tím je zajištěno, že zvukový podnět nepřeruší probíhající útočné chování.
+
+\subsection{Správa stavů}
+
+Aktuální stav NPC je reprezentován výčtovým typem \texttt{E\_AIState} a uložen v \textit{blackboardu}. 
+
+Pro práci se stavem jsou implementovány pomocné metody:
+\begin{itemize}
+    \item \texttt{GetCurrentState} – vrací aktuální stav,
+    \item \texttt{SetStateAsPassive} – nastaví pasivní chování,
+    \item \texttt{SetStateAsAttacking} – nastaví útočný režim,
+    \item \texttt{SetStateAsInvestigating} – nastaví režim vyšetřování.
+\end{itemize}
+
+Každá z těchto metod provádí nejen změnu stavu, ale i odpovídající aktualizaci dalších klíčů (např. cíle útoku nebo bodu zájmu).
+Tím je zajištěno, že behaviorální strom vždy pracuje s konzistentními daty.
+
+\subsection{Interakce s objekty}
+
+Součástí implementace je i podpora interakcí s objekty ve scéně.
+Při detekci aktéra, který implementuje rozhraní pro interakci, je jeho reference uložena do klíče \texttt{CurrentInteractionTarget}.
+Pokud se jedná o nový objekt (lišný od posledního), je tato změna propagována do \textit{blackboardu}.
+
+Další metody umožňují reagovat na konkrétní události:
+\begin{itemize}
+    \item \texttt{NotifyItemPickUp} – zaznamená typ drženého objektu,
+    \item \texttt{NotifyItemPlaced} – vymaže informaci o drženém objektu.
+\end{itemize}
+
+Tyto informace jsou následně využívány behaviorálním stromem pro rozhodování o dalším postupu.
+
+\section{Implementace stromu chování (BT\_NPC)}
+\label{sec:implementace-bt-npc}
+
+Strom chování \texttt{BT\_NPC} se větví do tří hlavních větví (\texttt{Attacking}, \texttt{Investigating}, \texttt{Passive}).
+
+Chování NPC je dále ovlivněno stavem několika klíčů v \textit{blackboard}, které reprezentují aktuální fázi hry.
+Na základě těchto hodnot dochází ke změnám v dostupných hlídkových trasách.
+\begin{itemize}
+    \item \texttt{Fáze hledání} -- hráč hledá klíč od venkovní boudy,
+    \item \texttt{Fáze pátrání} -- hráč odemknul venkovní boudu,
+    \item \texttt{Fáze útěku} –- hráč se snaží utéct z pozemku.
+\end{itemize}
+
+Přechody mezi jednotlivými fázemi jsou řízeny pomocí \textit{blackboard klíčů} \texttt{SearchShed} a \texttt{IsShedOpen}, které odrážejí postup hráče ve hře.
+
+Tato struktura přirozeně vyjadřuje prioritizaci chování: útok má přednost před~pátráním a~pátrání má přednost před~hlídkováním.
+NPC zmenšují počet hlídkovacích tras, které si vybírají k hlídkování a zvyšují svůj pobyt venku, aby zamezili útěku hráče.
+
+\subsection*{Větev Attacking}
+
+Větev \texttt{Attacking} reprezentuje chování NPC v situaci, kdy je detekován nepřítel.
+Je aktivována na základě hodnoty klíče \texttt{State} v \textit{blackboardu}, který je nastaven na \texttt{Attacking}
+v rámci zpracování percepčních podnětů.
+
+V této větvi NPC využívá klíč \texttt{AttackTarget}, který obsahuje referenci na aktuální cíl.
+Na základě této hodnoty dochází k pohybu směrem k cíli a následnému provedení útoku.
+
+Samotný útok je realizován pomocí úlohy \texttt{BTT\_Attack}, která spouští odpovídající animační montáž (viz \ref{fig:notify_timeline}) a řídí průběh útočné akce.
+
+Chování v této větvi má nejvyšší prioritu, což znamená, že při detekci nepřítele dochází k okamžitému přepnutí z ostatních stavů do útočného režimu.
+
+\subsection*{Větev Investigating}
+
+Větev \texttt{Investigating} reprezentuje chování NPC při vyhodnocení podezřelého podnětu,
+typicky na základě sluchového vjemu.
+
+Aktivace této větve je řízena hodnotou klíče \texttt{State} v \textit{blackboard},
+který je nastaven na \texttt{Investigating} ve funkci \texttt{HandleSensedSound}.
+Současně je do klíče \texttt{PointOfInterest} uložena poloha, odkud byl podnět zaznamenán.
+
+V rámci této větve se NPC přesouvá k uložené pozici a provádí její prohledání.
+Konkrétní průběh tohoto chování je řízen behaviorálním stromem na základě hodnoty klíče \texttt{PointOfInterest}.
+
+Pokud během vyšetřování dojde k detekci nepřítele, dochází ke změně stavu na \texttt{Attacking}, což má vyšší prioritu a způsobí opuštění této větve.
+Pokud se naopak ukáže, že prozkoumávané místo není ničím důležité, tak dojde ke změně do stavu \texttt{Passive}.
+
+\subsection*{Větev Passive}
+
+Větev \texttt{Passive} reprezentuje výchozí chování NPC v situaci, kdy není detekován žádný významný podnět.
+Slouží jako základní režim, ve kterém NPC vykonává hlídkování.
+
+V rámci této větve je využita služba \texttt{BTS\_EnsurePatrolRoute}, která zajišťuje, že má NPC přiřazenou platnou hlídkovou trasu.
+V případě, že žádná trasa není nastavena, služba vyžádá její přidělení prostřednictvím systému \texttt{BP\_RoutingManager}.
+
+Samotný pohyb po trase je realizován úlohou \texttt{BTT\_MoveAlongPatrolRoute}, která postupně naviguje NPC mezi jednotlivými body hlídkové trasy.
+
+Taktéž v této větvi probíhají interakce \texttt{BTT\_InteractWithActor}, přemisťování předmětů \texttt{BTT\_PlaceItem}, komunikace 
+s jiným NPC \texttt{BTT\_InteractWithOtherNPC} a dělání rozhodnutí o změnách hlídkových tras. 
+
+Pokud NPC nemá k dispozici žádnou trasu, setrvává na místě do doby, než je jí trasa přidělena.
+Tato větev tak zajišťuje kontinuální chování NPC i v případě absence dalších podnětů z okolí.
+
+\section{Implementace úloh a služeb}
+\label{sec:implementace-tasky}
+
+Tato část popisuje vybrané úlohy a služby behaviorálního stromu, které přímo propojují rozhodovací logiku stromu s konkrétními akcemi NPC ve světě hry. 
+Úlohy typu \textit{Task} slouží k provedení jednorázové nebo déle trvající akce, zatímco služby typu \textit{Service} průběžně aktualizují data potřebná pro vykonávání dané větve stromu.
+
+\subsection*{BTT\_Attack}
+
+Úloha \texttt{BTT\_Attack} realizuje spuštění útoku řízené NPC postavy. 
+Při vykonání úlohy je nejprve získána reference na ovládanou postavu a ta je přetypována na \texttt{BP\_NPC}. 
+Následně je na této postavě zavolána událost \texttt{Attack}, která je implementována v třídě \texttt{BP\_NPC} a zajišťuje přehrání útočné animační montáže.
+
+Úloha není ukončena okamžitě po spuštění animace. 
+Místo toho se naváže na událost \texttt{OnAttackEnd}, která je vyvolána až po dokončení útoku. 
+Teprve poté je zavoláno \texttt{Finish Execute} s výsledkem \texttt{Success}. 
+Tím je zajištěno, že behaviorální strom pokračuje až ve chvíli, kdy je útočná akce skutečně dokončena.
+
+Součástí úlohy je také obsluha přerušení. 
+Pokud je úloha předčasně ukončena, například kvůli přechodu do jiné větve stromu, je zastaven pohyb controlleru, zrušen aktuální focus 
+a úloha je ukončena pomocí \texttt{Finish Abort}. 
+Tento postup zabraňuje tomu, aby NPC po přerušení útoku pokračovalo v neaktuální akci.
+
+\subsection*{BTT\_MoveAlongPatrolRoute}
+
+Úloha \texttt{BTT\_MoveAlongPatrolRoute} zajišťuje pohyb NPC po aktuálně přiřazené hlídkové trase. 
+Při spuštění úloha načte z \textit{blackboardu} hodnotu klíče \texttt{CurrentPatrolRoute} a zkontroluje se, zda je klíč platný.
+
+Z trasy je následně získána světová pozice aktuálního bodu pomocí funkce \texttt{GetSplinePointAsWorldPosition}. 
+Na tuto pozici je NPC navigována pomocí uzlu \texttt{AI MoveTo}. 
+Po úspěšném dosažení cíle je na trase zavolána funkce \texttt{IncrementPatrolRoute}, která posune interní ukazatel na další bod trasy. 
+Poté je úloha ukončena pomocí \texttt{Finish Execute} s výsledkem \texttt{Success}.
+
+Pokud se nepodaří získat platnou trasu, přetypování selže nebo pohyb k cílové pozici není úspěšný, úloha je ukončena neúspěšně. 
+Součástí implementace je také reakce na přerušení úlohy, při které je pohyb NPC zastaven a úloha je ukončena pomocí \texttt{Finish Abort}.
+
+\subsection*{BTS\_EnsurePatrolRoute}
+
+Služba \texttt{BTS\_EnsurePatrolRoute} zajišťuje, že má NPC během pasivního chování přiřazenou platnou hlídkovou trasu. 
+Při aktivaci služby je z \textit{blackboardu} načten klíč \texttt{CurrentPatrolRoute}. 
+Pokud je tato hodnota již nastavena, není nutné trasu měnit.
+
+V případě, že NPC platnou trasu nemá, služba načte z \textit{blackboardu} referenci na systém \texttt{BP\_RoutingManager}. 
+Po ověření platnosti této reference je řízená postava přetypována na \texttt{BP\_NPC} a je zavolána funkce \texttt{ChangeRoute}. 
+Výsledkem této funkce je nová hlídková trasa, která je následně uložena zpět do klíče \texttt{CurrentPatrolRoute}.
+
+Tato služba odděluje samotné přidělování tras od úlohy, která po trase pouze vykonává pohyb. 
+Díky tomu může být logika výběru trasy spravována centralizovaně v \texttt{BP\_RoutingManager}, zatímco behaviorální strom pracuje pouze 
+s aktuálně přiřazenou trasou.
+
+\section{Implementace hlídkových tras}
+\label{sec:implementace-routing}
+
+\subsection*{BP\_PatrolRoute}
+
+Třída \texttt{BP\_PatrolRoute} reprezentuje hlídkovou trasu
+pomocí komponenty typu \texttt{SplineComponent}, která definuje
+plynulou křivku ve~světovém prostoru herní úrovně. Jednotlivé
+hlídkové body nejsou explicitně reprezentovány samostatnými
+komponentami, ale odpovídají bodům spline křivky.
+
+Pro práci s~trasou třída poskytuje několik metod. Metoda
+\texttt{GetSplinePointAsWorldPosition}
+vrací světovou polohu bodu spline se zadaným indexem.
+Dále je implementována metoda \texttt{IncrementPatrolRoute},
+která aktualizuje index aktuálního bodu na základě směru
+pohybu a typu trasy.
+
+Trasa může být buď cyklická, nebo otevřená. V případě cyklické
+trasy je index inkrementován modulo počtem bodů spline.
+U otevřené trasy dochází při dosažení koncových bodů ke změně
+směru průchodu (tzv. „ping-pong“ pohyb), což je realizováno
+přepínáním hodnoty proměnné \texttt{Direction}.
+
+Pomocné metody \texttt{GetRouteProgress} a \texttt{GetRouteType}
+umožňují získat relativní postup po trase a určit, zda se jedná
+o cyklickou či necyklickou trasu.
+
+\subsection*{BP\_RoutingManager}
+
+Třída \texttt{BP\_RoutingManager} implementuje správu hlídkových
+tras a jejich přidělování NPC postavám.
+
+Při inicializaci v rámci události \texttt{BeginPlay} jsou vyhledány všechny dostupné 
+hlídkové trasy v levelu a ty jsou uloženy do interních kolekcí.
+Trasy jsou dále rozděleny do skupin na základě tagů aktérů (např. \texttt{STAGE2}, \texttt{STAGE3}), což umožňuje řídit, které trasy jsou dostupné 
+v různých fázích hry.
+
+Obsazenost tras není reprezentována přímo v objektech tras, ale je evidována v mapě \texttt{Occupants}, která mapuje instance NPC na jim přidělené trasy.
+
+Metoda \texttt{AcquireRoute(Requester)} vrací trasu pro daného žadatele. 
+Pokud již má NPC trasu přidělenou, je vrácena tato existující trasa. 
+V opačném případě dojde k náhodnému promíchání seznamu tras a následně k výběru první neobsazené trasy.
+Vybraná trasa je zapsána do mapy \texttt{Occupants}.
+
+Metoda \texttt{IsRouteOccupied(Route)} ověřuje, zda je daná trasa aktuálně obsazena některou NPC postavou.
+
+Metoda \texttt{ReleaseRoute(Requester)} odstraní záznam o přiřazení trasy danému NPC a tím ji uvolní pro další použití.
+
+Metoda \texttt{ChangeRoute(Requester)} nejprve uvolní aktuální trasu a následně přidělí novou trasu pomocí \texttt{AcquireRoute}.
+Specifické varianty \texttt{ChangeRoute\_Stage2} a \texttt{ChangeRoute\_Stage3} vybírají trasu pouze z příslušné podmnožiny tras definované tagy.
+
+Pokud není žádná volná trasa k dispozici, metoda vrací hodnotu \texttt{None}, přičemž NPC může o přiřazení požádat znovu v dalším průchodu stromem.
+
+\section{Sdílení informací o předmětech}
+\label{sec:sharing_information}
+
+Komunikace mezi NPC není v implementaci řešena přímým předáváním informací o detekovaných hrozbách. 
+Namísto toho je zaměřena na sdílení znalostí o herních předmětech, především o jejich výchozích pozicích a případném nesprávném umístění.
+
+Základním prvkem tohoto systému je třída \texttt{BP\_GameStateBase}, která udržuje společný seznam předmětů ve scéně. Každý předmět odvozený
+od třídy \texttt{BP\_BaseItem} se při spuštění zaregistruje do tohoto seznamu pomocí funkce \texttt{AddToItemList}. 
+Současně je uložena jeho výchozí poloha prostřednictvím funkce \texttt{SetItemHomePosition}.
+Tím vzniká sdílený zdroj informací, ke kterému mohou NPC při svém chování přistupovat.
+
+Pro zjištění předmětu, který je potřeba uklidit, slouží funkce \texttt{RequestItemCleanup}. 
+Ta prochází registrované předměty a hledá takový, který je označen jako nesprávně umístěný. 
+Pokud je takový předmět nalezen, vrací referenci na něj společně s jeho aktuální polohou.
+
+Vlastní výměna informací mezi NPC je realizována v úloze \texttt{BTT\_InteractWithOtherNPC}. 
+Tato úloha vyhledá ostatní instance \texttt{BP\_NPC} ve scéně a vybere jinou postavu než tu, která úlohu právě vykonává. 
+Následně pracuje se seznamy známých předmětů jednotlivých NPC a porovnává informace o jejich umístění.
+
+Pokud NPC získá od jiné postavy relevantní informaci o předmětu, může tuto informaci využít pro aktualizaci vlastních hodnot v \textit{blackboardu}. 
+V implementaci se tímto způsobem pracuje například s informací o ztraceném předmětu a s klíči souvisejícími s hledáním boudy. 
+Díky tomu mohou NPC nepřímo sdílet informace o stavu herního světa, aniž by mezi nimi existoval samostatný systém zpráv nebo událostí.
+
+\section{Implementační problémy a rozhodnutí}
+\label{sec:problems_and_solutions}
+Původní návrh systému komunikace mezi NPC počítal s individuální komponentou \texttt{BPC\_MemorySystem} připojenou ke každé NPC postavě. 
+Tato komponenta měla uchovávat záznamy o objektech, se kterými postava přišla do kontaktu, a umožňovat přímou výměnu těchto záznamů mezi NPC.
+
+Při implementaci se však ukázalo, že synchronizace paměťových záznamů mezi instancemi komponent napříč různými postavami nebyla spolehlivá. 
+Docházelo k nekonzistentním stavům, kdy si NPC předávaly neaktuální nebo neplatné reference.
+
+Problém byl vyřešen přechodem na centralizovaný přístup prostřednictvím třídy \texttt{BP\_GameStateBase}. 
+Místo individuálních paměťových komponent byl zaveden společný registr objektů dostupný všem NPC. 
+Každý objekt si při inicializaci zaregistruje výchozí polohu, ke které NPC přistupují při rozhodování. 
+Přímá výměna paměťových záznamů byla nahrazena porovnáním lokálního seznamu \texttt{ItemsKnownList} s tímto centrálním registrem.
+
+
+

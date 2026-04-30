@@ -1,0 +1,21 @@
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {czech}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Zjednodušená struktura behaviorálního stromu pro NPC.}}{16}{figure.caption.6}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Přehled komponent systému NPC a jejich vzájemných vazeb}}{22}{figure.caption.7}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Přehled hlavních stavů NPC a přechodů mezi nimi}}{24}{figure.caption.8}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Umístění události \texttt {AN\_HitEvent} v animační montáži}}{31}{figure.caption.9}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Implementace události \texttt {AN\_HitEvent} v blueprintu}}{31}{figure.caption.10}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Implementace metody CanSenseActor}}{33}{figure.caption.11}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1}{\ignorespaces Kompletní struktura behaviorálního stromu použitého v systému NPC}}{45}{figure.caption.14}%
+\addvspace {10\p@ }

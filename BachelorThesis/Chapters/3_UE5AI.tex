@@ -1,0 +1,72 @@
+\chapter{Unreal Engine 5 a AI systém}
+
+Tato kapitola se zabývá nástroji Unreal Engine 5, které slouží k implementaci chování NPC. 
+Nejprve je stručně vysvětlen pojem herního enginu a představen Unreal Engine 5. 
+Následně jsou popsány konkrétní systémy, které jsou v této práci využity pro řízení chování postav.
+
+\section{Herní engine a Unreal Engine 5}
+
+Herní engine je softwarový nástroj, který poskytuje základní funkcionalitu potřebnou pro vývoj her. 
+Typicky zahrnuje subsystémy pro vykreslování grafiky, fyzikální simulaci, práci se vstupy nebo správu herní logiky. 
+Díky tomu se vývojář nemusí zabývat implementací těchto základních částí od začátku a může se soustředit na konkrétní obsah hry.\cite[s.~11--13]{gregory2018} 
+Herní engine tedy pomáhá zvýšit potenciální produktivitu vývojáře.
+
+Unreal Engine 5 (UE5) je moderní herní engine vyvíjený společností Epic Games. 
+Kromě samotného běhu hry poskytuje také nástroje pro tvorbu herního obsahu a logiky. 
+Jednou z jeho výhod je integrace systémů pro tvorbu umělé inteligence, které umožňují navrhovat chování NPC přímo 
+v rámci enginu bez nutnosti použití externích knihoven.\cite{epic_gameplay_systems}
+
+V UE5 je možné implementovat herní prvky a logiku buď pomocí C++, nebo pomocí proprietárního vizuálního skriptovacího systému, který se nazývá Blueprint.
+V této práci jsou všechny systémy implementovány pomocí Blueprintu.
+
+
+\section{Pawn a AI Controller}
+
+V Unreal Engine 5 je objekt reprezentující postavu ve hře označován jako Pawn. 
+Pawn určuje fyzickou přítomnost postavy ve scéně, například její polohu nebo pohyb.\cite{epic_pawn} 
+
+Každý Pawn má controller, kterým je řízen. 
+Pokud je postava ovládána hráčem, používá se Player Controller, v případě NPC pak AI Controller.\cite{epic_controller}
+
+Typicky při převzetí kontroly nad Pawnem spouští behaviorální strom, který definuje jednotlivé akce NPC. 
+Standardně platí mezi Pawn a Controller vazba 1:1, ale možná je i vícenásobná vazba (např. pro hry žánru RTS).
+Propojení mezi AI Controllerem a Pawnem umožňuje controlleru ovládat pohyb i další aspekty chování postavy.
+
+\section{Behaviorální strom v UE5}
+
+Behaviorální strom je v Unreal Engine implementován jako samostatný asset, který lze upravovat pomocí grafického editoru.\cite{epic_bt} 
+Princip jeho fungování odpovídá obecné teorii popsané v předchozí kapitole.
+
+Strom se skládá z uzlů, které definují jednotlivé části chování. 
+V UE5 se používají zejména tři typy uzlů:
+\begin{itemize}
+    \item \textit{Task} – představuje konkrétní akci (např. pohyb na cílovou pozici),
+    \item \textit{Service} – pravidelně aktualizuje data během vykonávání větve,
+    \item \textit{Decorator} – určuje podmínky, za kterých může být větev vykonána.
+\end{itemize}
+
+Behaviorální strom pracuje s daty uloženými v Blackboard a na jejich základě rozhoduje, jaká větev bude v daném okamžiku vykonána. 
+Výhodou tohoto přístupu je přehlednost a možnost jednoduché úpravy chování bez zásahu do zdrojového kódu \cite[s.~80]{butler2023}.
+
+\section{Blackboard}
+
+Blackboard slouží jako sdílené datové úložiště pro behaviorální strom. 
+Uchovává hodnoty přiřazené ke klíčům, například referenci na hráče, cílovou pozici nebo aktuální stav postavy.\cite{epic_bt} 
+
+Samotný Blackboard neobsahuje žádnou logiku, pouze zpřístupňuje data ostatním částem systému. 
+Tyto hodnoty mohou být nastavovány z různých míst, například z behaviorálního stromu nebo přímo z Blueprintu postavy.
+
+\section{Navigační systém}
+
+Pro pohyb NPC v prostředí využívá UE5 navigační systém založený na tzv. Navigation Mesh (NavMesh). 
+NavMesh reprezentuje průchodné oblasti scény a určuje, kde se může postava pohybovat.\cite{epic_navsystem} 
+
+Při vykonání akce pohybu (např. pomocí uzlu \textit{MoveTo}) je cílová pozice předána navigačnímu systému, který vypočítá cestu po NavMesh. 
+Samotný pohyb postavy je následně realizován komponentou pro pohyb postavy.
+
+\section{AI Perception}
+
+AI Perception umožňuje NPC vnímat okolní prostředí prostřednictvím definovaných smyslů, například zraku nebo sluchu \cite{epic_perception}. 
+
+Při zaznamenání podnětu (např. detekce hráče) dojde k vyvolání události, na jejímž základě se aktualizují hodnoty v Blackboardu. 
+Behaviorální strom poté při dalším vyhodnocení reaguje na novou situaci a zvolí odpovídající chování.

@@ -1,0 +1,68 @@
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {czech}{}\relax 
+\contentsline {chapter}{Seznam použitých symbolů a zkratek}{8}{chapter*.2}%
+\contentsline {chapter}{Seznam obr\'azk\r {u}}{9}{chapter*.3}%
+\contentsline {chapter}{Seznam tabulek}{10}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}Úvod}{11}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Behaviorální stromy}{12}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Úloha behaviorálních stromů}{12}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Základní princip vykonávání}{13}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Struktura behaviorálního stromu}{13}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Základní typy uzlů}{14}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Kompozitní uzly}{14}{subsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.1.1}Sequence}{14}{subsubsection.2.4.1.1}%
+\contentsline {subsubsection}{\numberline {2.4.1.2}Selector}{14}{subsubsection.2.4.1.2}%
+\contentsline {subsubsection}{\numberline {2.4.1.3}Parallel}{14}{subsubsection.2.4.1.3}%
+\contentsline {subsection}{\numberline {2.4.2}Dekorátorové uzly}{15}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Listové uzly}{15}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Výhody behaviorálních stromů}{17}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Omezení behaviorálních stromů}{17}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Unreal Engine 5 a AI systém}{18}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Herní engine a Unreal Engine 5}{18}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Pawn a AI Controller}{18}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Behaviorální strom v UE5}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Blackboard}{19}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Navigační systém}{19}{section.3.5}%
+\contentsline {section}{\numberline {3.6}AI Perception}{20}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Návrh a architektura NPC systému}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Přehled systému a jeho komponent}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Rozdělení odpovědností}{22}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Stavový model NPC}{23}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Architektura behaviorálního stromu}{24}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Větev Passive}{24}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Větev Attacking}{25}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Větev Investigating}{25}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Tok dat v systému}{26}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Správa hlídkových tras}{26}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Reprezentace znalostí NPC}{26}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Globální stav objektů}{27}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Lokální znalosti NPC}{27}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Inicializace znalostí}{27}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Detekce změn v prostředí}{27}{subsection.4.7.4}%
+\contentsline {section}{\numberline {4.8}Komunikace mezi NPC}{28}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Reakce na hráče a prostředí}{28}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Návrhová rozhodnutí}{28}{section.4.10}%
+\contentsline {chapter}{\numberline {5}Implementace systému NPC}{30}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Implementace BP\_NPC}{30}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Implementace AI Controlleru (IAC\_NPC)}{32}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Inicializace a napojení na behaviorální strom}{32}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Zpracování percepce}{33}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}Zrakové podněty}{33}{subsubsection.5.2.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2.2}Sluchové podněty}{34}{subsubsection.5.2.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Správa stavů}{34}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Interakce s objekty}{35}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Implementace stromu chování (BT\_NPC)}{35}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Implementace úloh a služeb}{36}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Implementace hlídkových tras}{38}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Sdílení informací o předmětech}{39}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Implementační problémy a rozhodnutí}{39}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Testování a evaluace řešení}{40}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Závěr}{42}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Možná rozšíření a budoucí práce}{42}{section.7.1}%
+\contentsline {chapter}{Literatura}{44}{chapter*.13}%
+\contentsline {chapter}{Přílohy}{44}{chapter*.13}%
+\contentsline {chapter}{\numberline {A}Struktura projektu}{46}{appendix.A}%

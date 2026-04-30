@@ -1,0 +1,260 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{colledanchise2018}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=db7c35906ea6fb15b4ad802938cde9b5}{%
+           family={Colledanchise},
+           familyi={C\bibinitperiod},
+           given={Michele},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ebd3acb81e2d857e368ec17c18bec591}{%
+           family={Ögren},
+           familyi={Ö\bibinitperiod},
+           given={Petter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Chapman}%
+        {Hall/CRC}%
+      }
+      \strng{namehash}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \strng{fullhash}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \strng{fullhashraw}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \strng{bibnamehash}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \strng{authorbibnamehash}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \strng{authornamehash}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \strng{authorfullhash}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \strng{authorfullhashraw}{a7ac798c3a7f5340156bccfc5c9a4bdf}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Behavior Trees in Robotics and AI: An Introduction}
+      \field{year}{2018}
+    \endentry
+    \entry{butler2023}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=39fc60fa0536270bd244870d458e6b50}{%
+           family={Butler},
+           familyi={B\bibinitperiod},
+           given={Stuart},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e74644f45d3e6f75f9024eb943406614}{%
+           family={Oliver},
+           familyi={O\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Packt Publishing}%
+      }
+      \strng{namehash}{ec17a4f1569e99be4cf5825f7939c53e}
+      \strng{fullhash}{ec17a4f1569e99be4cf5825f7939c53e}
+      \strng{fullhashraw}{ec17a4f1569e99be4cf5825f7939c53e}
+      \strng{bibnamehash}{ec17a4f1569e99be4cf5825f7939c53e}
+      \strng{authorbibnamehash}{ec17a4f1569e99be4cf5825f7939c53e}
+      \strng{authornamehash}{ec17a4f1569e99be4cf5825f7939c53e}
+      \strng{authorfullhash}{ec17a4f1569e99be4cf5825f7939c53e}
+      \strng{authorfullhashraw}{ec17a4f1569e99be4cf5825f7939c53e}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-80324-325-2}
+      \field{title}{Game Development Patterns with Unreal Engine 5: Build Maintainable and Scalable Systems with C++ and Blueprint}
+      \field{year}{2023}
+    \endentry
+    \entry{gregory2018}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=b97f772b60bfb5bf77251b45263e44dd}{%
+           family={Gregory},
+           familyi={G\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{b97f772b60bfb5bf77251b45263e44dd}
+      \strng{fullhash}{b97f772b60bfb5bf77251b45263e44dd}
+      \strng{fullhashraw}{b97f772b60bfb5bf77251b45263e44dd}
+      \strng{bibnamehash}{b97f772b60bfb5bf77251b45263e44dd}
+      \strng{authorbibnamehash}{b97f772b60bfb5bf77251b45263e44dd}
+      \strng{authornamehash}{b97f772b60bfb5bf77251b45263e44dd}
+      \strng{authorfullhash}{b97f772b60bfb5bf77251b45263e44dd}
+      \strng{authorfullhashraw}{b97f772b60bfb5bf77251b45263e44dd}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3rd}
+      \field{title}{Game Engine Architecture}
+      \field{year}{2018}
+    \endentry
+    \entry{epic_gameplay_systems}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f74dc6a40e6ed3e07e99f3e972a5394a}{%
+           family={{Epic Games}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{bibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorbibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authornamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dev.epicgames.com/documentation/unreal-engine/gameplay-systems-in-unreal-engine}}
+      \field{note}{Accessed: 2025-04-27}
+      \field{title}{Gameplay Systems in Unreal Engine}
+      \field{year}{2025}
+    \endentry
+    \entry{epic_pawn}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f74dc6a40e6ed3e07e99f3e972a5394a}{%
+           family={{Epic Games}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{bibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorbibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authornamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dev.epicgames.com/documentation/unreal-engine/pawn-in-unreal-engine?application_version=5.0}}
+      \field{note}{Accessed: 2026-04-27}
+      \field{title}{Pawn}
+      \field{year}{2026}
+    \endentry
+    \entry{epic_controller}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f74dc6a40e6ed3e07e99f3e972a5394a}{%
+           family={{Epic Games}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{bibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorbibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authornamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \field{extraname}{3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dev.epicgames.com/documentation/unreal-engine/controllers-in-unreal-engine?application_version=5.0}}
+      \field{note}{Accessed: 2026-04-27}
+      \field{title}{AI Controllers in Unreal Engine}
+      \field{year}{2026}
+    \endentry
+    \entry{epic_bt}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f74dc6a40e6ed3e07e99f3e972a5394a}{%
+           family={{Epic Games}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{bibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorbibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authornamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \field{extraname}{4}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dev.epicgames.com/documentation/en-us/unreal-engine/behavior-trees-in-unreal-engine?application_version=5.0}}
+      \field{note}{Accessed: 2026-04-27}
+      \field{title}{Behavior Trees in Unreal Engine}
+      \field{year}{2026}
+    \endentry
+    \entry{epic_navsystem}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f74dc6a40e6ed3e07e99f3e972a5394a}{%
+           family={{Epic Games}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{bibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorbibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authornamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \field{extraname}{5}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dev.epicgames.com/documentation/unreal-engine/navigation-system-in-unreal-engine}}
+      \field{note}{Accessed: 2026-04-27}
+      \field{title}{Navigation System}
+      \field{year}{2026}
+    \endentry
+    \entry{epic_perception}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f74dc6a40e6ed3e07e99f3e972a5394a}{%
+           family={{Epic Games}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{fullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{bibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorbibnamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authornamehash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
+      \field{extraname}{6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dev.epicgames.com/documentation/en-us/unreal-engine/ai-perception-in-unreal-engine?application_version=5.0}}
+      \field{note}{Accessed: 2026-04-27}
+      \field{title}{AI Perception in Unreal Engine}
+      \field{year}{2026}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

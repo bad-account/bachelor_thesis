@@ -1,0 +1,41 @@
+\chapter{Závěr}
+\label{sec:conclusion}
+
+Cílem této bakalářské práce bylo navrhnout a implementovat systém
+chování nehráčských postav (NPC) v herním prostředí s využitím
+behaviorálních stromů v prostředí Unreal Engine~5.
+
+Navržený systém kombinuje využití \texttt{AI Controlleru},
+\texttt{Blackboardu} a behaviorálního stromu, což umožňuje
+modulární a přehlednou implementaci jednotlivých typů chování.
+Součástí řešení je také systém percepce založený na zrakových
+a sluchových podnětech a mechanismus sdílení informací o
+předmětech prostřednictvím \texttt{GameState}.
+
+V rámci implementace se podařilo vytvořit funkční prototyp,
+ve kterém NPC dokáží hlídkovat, reagovat na hráče,
+interagovat s objekty ve scéně a pracovat s předměty.
+Chování jednotlivých postav odpovídá návrhu a je snadno
+rozšiřitelné o další prvky.
+
+Testování ukázalo, že základní mechanismy systému fungují
+spolehlivě, zejména v oblasti percepce, přechodů mezi stavy
+a pohybu po hlídkových trasách. Naopak některé pokročilejší
+části, jako manipulace s předměty nebo sdílení informací mezi
+NPC, nebyly plně ověřeny a představují prostor pro další
+vylepšení.
+
+\section{Možná rozšíření a budoucí práce}
+
+Navržený systém chování NPC by bylo možné dále rozšířit o reakce na dynamické změny prostředí. 
+Jednou z možností je zohlednění denní doby a povětrnostních podmínek.
+Například v nočních hodinách by NPC mohly trávit více času v interiéru, zatímco během dne by se častěji pohybovaly v okolí domu. 
+Podobně by bylo možné simulovat vliv deště, který by negativně ovlivňoval percepční schopnosti NPC, například zhoršením sluchu.
+
+Dalším rozšířením by bylo zavedení interaktivních prvků v prostředí, jako jsou například světelné vypínače.
+NPC by mohly reagovat na změny osvětlení v místnostech, například snahou rozsvítit při vstupu do tmavého prostoru, nebo naopak vyhýbáním se neosvětleným místnostem.
+Takové chování by mohlo přispět k vyšší věrohodnosti a variabilitě simulace.
+
+Uvedená rozšíření nebyla v rámci této práce implementována, je ale možné takových cílů dosáhnout při dalším vývoji této hry.
+
+\endinput
