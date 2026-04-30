@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.1)  30 APR 2026 18:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.1)  30 APR 2026 23:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/krato/OneDrive/Plocha/final/bachelor_thesis/BachelorThesis/BachelorThesis.tex
-(c:/Users/krato/OneDrive/Plocha/final/bachelor_thesis/BachelorThesis/BachelorThesis.tex
+**c:/Users/krato/OneDrive/Plocha/bachelor_thesis/BachelorThesis/BachelorThesis.tex
+(c:/Users/krato/OneDrive/Plocha/bachelor_thesis/BachelorThesis/BachelorThesis.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (diploma.cls
@@ -1820,7 +1820,7 @@ File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 72.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 76.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (BachelorThesis.aux
@@ -1829,24 +1829,24 @@ Package babel Info: 'czech' activates 'czech' shorthands.
 )
 \openout1 = `BachelorThesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1907,7 +1907,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 72.
+Package hyperref Info: Link coloring ON on input line 76.
  (BachelorThesis.out) (BachelorThesis.out)
 \@outlinefile=\write7
 \openout7 = `BachelorThesis.out'.
@@ -1948,47 +1948,47 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'BachelorThesis.bbl' found.
  (BachelorThesis.bbl)
-Package biblatex Info: Reference section=0 on input line 72.
-Package biblatex Info: Reference segment=0 on input line 72.
+Package biblatex Info: Reference section=0 on input line 76.
+Package biblatex Info: Reference segment=0 on input line 76.
 \c@lstlisting=\count547
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 75.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 79.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
 pdfTeX warning: pdflatex (file ./Figures/FEI_CZ.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<Figures/FEI_CZ.pdf, id=180, 350.70023pt x 109.21pt>
+<Figures/FEI_CZ.pdf, id=184, 350.70023pt x 109.21pt>
 File: Figures/FEI_CZ.pdf Graphic file (type pdf)
 <use Figures/FEI_CZ.pdf>
-Package pdftex.def Info: Figures/FEI_CZ.pdf  used on input line 75.
+Package pdftex.def Info: Figures/FEI_CZ.pdf  used on input line 79.
 (pdftex.def)             Requested size: 274.11765pt x 85.35826pt.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 75.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 79.
 (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 75.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 79.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 75.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 79.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 75.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 79.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 75.
+(Font)              <14.4> on input line 79.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 75.
+(Font)              <10> on input line 79.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 75.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 75.
+(Font)              <7> on input line 79.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 79.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 75.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -2000,49 +2000,49 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Figures/FEI_CZ.pdf>]
-<ThesisAssignment.pdf, id=213, 597.23125pt x 845.1575pt>
+<ThesisAssignment.pdf, id=217, 597.23125pt x 845.1575pt>
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf>
-Package pdftex.def Info: ThesisAssignment.pdf  used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf  used on input line 79.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-<ThesisAssignment.pdf, id=215, page=1, 597.23125pt x 845.1575pt>
+<ThesisAssignment.pdf, id=219, page=1, 597.23125pt x 845.1575pt>
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 1>
-Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 79.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 1>
-Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 79.
 (pdftex.def)             Requested size: 561.86221pt x 795.10587pt.
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 1>
-Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 79.
 (pdftex.def)             Requested size: 561.86221pt x 795.10587pt.
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 1>
-Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 79.
 (pdftex.def)             Requested size: 561.86221pt x 795.10587pt.
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 1>
-Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page1 used on input line 79.
 (pdftex.def)             Requested size: 561.86221pt x 795.10587pt.
  [2
 
 
 
  <./ThesisAssignment.pdf>]
-<ThesisAssignment.pdf, id=242, page=2, 597.23125pt x 845.1575pt>
+<ThesisAssignment.pdf, id=246, page=2, 597.23125pt x 845.1575pt>
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 2>
-Package pdftex.def Info: ThesisAssignment.pdf , page2 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page2 used on input line 79.
 (pdftex.def)             Requested size: 561.86221pt x 795.10587pt.
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 2>
-Package pdftex.def Info: ThesisAssignment.pdf , page2 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page2 used on input line 79.
 (pdftex.def)             Requested size: 561.86221pt x 795.10587pt.
 File: ThesisAssignment.pdf Graphic file (type pdf)
 <use ThesisAssignment.pdf, page 2>
-Package pdftex.def Info: ThesisAssignment.pdf , page2 used on input line 75.
+Package pdftex.def Info: ThesisAssignment.pdf , page2 used on input line 79.
 (pdftex.def)             Requested size: 561.86221pt x 795.10587pt.
  [3
 
@@ -2116,30 +2116,30 @@ Underfull \hbox (badness 1484) in paragraph at lines 173--173
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [15] [16]) (Chapters/3_UE5AI.tex [17]
+ [15] [16] [17] [18]) (Chapters/3_UE5AI.tex [19]
 Kapitola 3.
-[18
+[20
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 43.
  (C:\Users\krato\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [19{C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]) (Chapters/4_BehaviorDesign.tex [20]
+) [21{C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]) (Chapters/4_BehaviorDesign.tex [22]
 Kapitola 4.
-[21
+[23
 
 ]
 
 pdfTeX warning: pdflatex (file ./Figures/components.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/components.pdf, id=447, 566.115pt x 349.305pt>
+<Figures/components.pdf, id=468, 566.115pt x 349.305pt>
 File: Figures/components.pdf Graphic file (type pdf)
 <use Figures/components.pdf>
 Package pdftex.def Info: Figures/components.pdf  used on input line 40.
 (pdftex.def)             Requested size: 472.03123pt x 291.26088pt.
-[22 <./Figures/components.pdf>]
+[24 <./Figures/components.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/state_diagram.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/state_diagram.pdf, id=463, 406.3983pt x 174.6525pt>
+<Figures/state_diagram.pdf, id=484, 406.3983pt x 174.6525pt>
 File: Figures/state_diagram.pdf Graphic file (type pdf)
 <use Figures/state_diagram.pdf>
 Package pdftex.def Info: Figures/state_diagram.pdf  used on input line 81.
@@ -2147,28 +2147,28 @@ Package pdftex.def Info: Figures/state_diagram.pdf  used on input line 81.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23] [24 <./Figures/state_diagram.pdf>] [25] [26] [27] [28]
+ [25] [26 <./Figures/state_diagram.pdf>] [27] [28] [29] [30]
 Overfull \hbox (9.94875pt too wide) in paragraph at lines 266--268
 []\T1/lmr/bx/n/10.95 Pravd¥podobnostní ini-ci-a-li-zace cho-vání \T1/lmr/m/n/10.95 -- ná-hodná ini-ci-a-li-zace hod-not \T1/lmtt/m/n/10.95 RouteChangeChance
  []
 
-) (Chapters/5_Implementation.tex [29]
+) (Chapters/5_Implementation.tex [31]
 Kapitola 5.
-[30
+[32
 
 ]
-<Figures/AN_OnHitEvent.png, id=519, 1284.8pt x 691.58376pt>
+<Figures/AN_OnHitEvent.png, id=541, 1284.8pt x 691.58376pt>
 File: Figures/AN_OnHitEvent.png Graphic file (type png)
 <use Figures/AN_OnHitEvent.png>
 Package pdftex.def Info: Figures/AN_OnHitEvent.png  used on input line 35.
 (pdftex.def)             Requested size: 472.03123pt x 254.08801pt.
-<Figures/AN_OnHitEventBlueprint.png, id=521, 1033.36063pt x 405.515pt>
+<Figures/AN_OnHitEventBlueprint.png, id=543, 1033.36063pt x 405.515pt>
 File: Figures/AN_OnHitEventBlueprint.png Graphic file (type png)
 <use Figures/AN_OnHitEventBlueprint.png>
 Package pdftex.def Info: Figures/AN_OnHitEventBlueprint.png  used on input line 43.
 (pdftex.def)             Requested size: 472.03123pt x 185.23355pt.
- [31 <./Figures/AN_OnHitEvent.png> <./Figures/AN_OnHitEventBlueprint.png>] [32]
-<Figures/CanSenseActor.png, id=535, 1150.79938pt x 387.4475pt>
+ [33 <./Figures/AN_OnHitEvent.png> <./Figures/AN_OnHitEventBlueprint.png>] [34]
+<Figures/CanSenseActor.png, id=556, 1150.79938pt x 387.4475pt>
 File: Figures/CanSenseActor.png Graphic file (type png)
 <use Figures/CanSenseActor.png>
 Package pdftex.def Info: Figures/CanSenseActor.png  used on input line 115.
@@ -2178,98 +2178,95 @@ Overfull \hbox (24.96944pt too wide) in paragraph at lines 123--126
 \T1/lmr/m/n/10.95 Zrakové pod-n¥ty jsou zpra-co-vá-vány funkcí \T1/lmtt/m/n/10.95 HandleSensedSight\T1/lmr/m/n/10.95 , která na-va-zuje na funkci \T1/lmtt/m/n/10.95 CanSenseActor\T1/lmr/m/n/10.95 .
  []
 
-[33 <./Figures/CanSenseActor.png>] [34]
-Overfull \hbox (6.61082pt too wide) in paragraph at lines 198--199
+[35 <./Figures/CanSenseActor.png>] [36]
+Overfull \hbox (6.61082pt too wide) in paragraph at lines 198--200
 []\T1/lmr/m/n/10.95 P°echody mezi jed-not-li-vými fá-zemi jsou °í-zeny po-mocí \T1/lmr/m/it/10.95 blac-kbo-ard klí£· \T1/lmtt/m/n/10.95 SearchShed \T1/lmr/m/n/10.95 a \T1/lmtt/m/n/10.95 IsShedOpen\T1/lmr/m/n/10.95 ,
  []
 
-[35]
-Overfull \hbox (15.42271pt too wide) in paragraph at lines 221--224
+[37]
+Overfull \hbox (15.42271pt too wide) in paragraph at lines 222--225
 []\T1/lmr/m/n/10.95 Aktivace této v¥tve je °í-zena hod-no-tou klí£e \T1/lmtt/m/n/10.95 State \T1/lmr/m/n/10.95 v \T1/lmr/m/it/10.95 blac-kbo-ard\T1/lmr/m/n/10.95 , který je na-sta-ven na \T1/lmtt/m/n/10.95 Investigating
  []
 
 
-Overfull \hbox (41.51009pt too wide) in paragraph at lines 241--243
+Overfull \hbox (41.51009pt too wide) in paragraph at lines 242--244
 []\T1/lmr/m/n/10.95 Taktéº v této v¥tvi pro-bí-hají in-ter-akce \T1/lmtt/m/n/10.95 BTT_InteractWithActor\T1/lmr/m/n/10.95 , p°e-mis-´o-vání p°ed-m¥t· \T1/lmtt/m/n/10.95 BTT_PlaceItem\T1/lmr/m/n/10.95 ,
  []
 
-[36]
-Overfull \hbox (6.97472pt too wide) in paragraph at lines 259--263
+[38]
+Overfull \hbox (6.97472pt too wide) in paragraph at lines 260--264
 []\T1/lmr/m/n/10.95 Úloha není ukon-£ena oka-mºit¥ po spu²-t¥ní ani-mace. Místo toho se na-váºe na udá-lost \T1/lmtt/m/n/10.95 OnAttackEnd\T1/lmr/m/n/10.95 ,
  []
 
 
-Overfull \hbox (61.13844pt too wide) in paragraph at lines 274--278
+Overfull \hbox (61.13844pt too wide) in paragraph at lines 275--279
 []\T1/lmr/m/n/10.95 Z trasy je ná-sledn¥ zís-kána sv¥-tová po-zice ak-tu-ál-ního bodu po-mocí funkce \T1/lmtt/m/n/10.95 GetSplinePointAsWorldPosition\T1/lmr/m/n/10.95 .
  []
 
 
-Overfull \hbox (49.62639pt too wide) in paragraph at lines 288--291
+Overfull \hbox (49.62639pt too wide) in paragraph at lines 289--292
 []\T1/lmr/m/n/10.95 V p°í-pad¥, ºe NPC plat-nou trasu nemá, sluºba na-£te z \T1/lmr/m/it/10.95 blac-kbo-ardu \T1/lmr/m/n/10.95 re-fe-renci na sys-tém \T1/lmtt/m/n/10.95 BP_RoutingManager\T1/lmr/m/n/10.95 .
  []
 
-[37]
-Overfull \hbox (61.66182pt too wide) in paragraph at lines 307--313
+[39]
+Overfull \hbox (61.66182pt too wide) in paragraph at lines 306--309
 \T1/lmr/m/n/10.95 vrací sv¥-to-vou po-lohu bodu spline se za-da-ným in-de-xem. Dále je im-ple-men-to-vána me-toda \T1/lmtt/m/n/10.95 IncrementPatrolRoute\T1/lmr/m/n/10.95 ,
  []
 
-[38]
-Overfull \hbox (10.1797pt too wide) in paragraph at lines 375--377
+[40]
+Overfull \hbox (10.1797pt too wide) in paragraph at lines 370--372
 \T1/lmr/m/n/10.95 P·vodní ná-vrh sys-tému ko-mu-ni-kace mezi NPC po-£í-tal s in-di-vi-du-ální kom-po-nen-tou \T1/lmtt/m/n/10.95 BPC_MemorySystem
  []
 
 
-Overfull \hbox (17.51833pt too wide) in paragraph at lines 381--385
+Overfull \hbox (17.51833pt too wide) in paragraph at lines 376--380
 []\T1/lmr/m/n/10.95 Problém byl vy-°e-²en p°e-cho-dem na cen-t-ra-li-zo-vaný p°í-stup pro-st°ed-nic-tvím t°ídy \T1/lmtt/m/n/10.95 BP_GameStateBase\T1/lmr/m/n/10.95 .
  []
 
-) (Chapters/6_Testing.tex [39]
+) (Chapters/6_Testing.tex [41]
 Kapitola 6.
 
 Underfull \hbox (badness 7099) in paragraph at lines 13--13
 []|\T1/lmr/m/n/10.95 NPC p°e-chází mezi stavy \T1/lmtt/m/n/10.95 Passive\T1/lmr/m/n/10.95 ,
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [40
-
-]) (Chapters/7_Conclusion.tex [41]
-Kapitola 7.
-) [42
+) (Chapters/7_Conclusion.tex [42
 
 ] [43]
-Overfull \hbox (28.84106pt too wide) in paragraph at lines 98--98
+Kapitola 7.
+) [44
+
+] [45]
+Overfull \hbox (34.31606pt too wide) in paragraph at lines 102--102
 []\T1/lmr/m/n/10.95 EPIC GA-MES. \T1/lmr/m/it/10.95 Ga-meplay Sys-tems in Unreal En-gine \T1/lmr/m/n/10.95 [[][]$\T1/lmtt/m/n/10.95 https : / / dev . epicgames . com / documentation /
  []
 
 
-Overfull \hbox (9.22511pt too wide) in paragraph at lines 98--98
+Overfull \hbox (14.7001pt too wide) in paragraph at lines 102--102
 []\T1/lmr/m/n/10.95 EPIC GA-MES. \T1/lmr/m/it/10.95 AI Con-t-rollers in Unreal En-gine \T1/lmr/m/n/10.95 [[][]$\T1/lmtt/m/n/10.95 https : / / dev . epicgames . com / documentation /
  []
 
 
-Overfull \hbox (11.0078pt too wide) in paragraph at lines 98--98
+Overfull \hbox (16.48279pt too wide) in paragraph at lines 102--102
 []\T1/lmr/m/n/10.95 EPIC GA-MES. \T1/lmr/m/it/10.95 Be-ha-vior Trees in Unreal En-gine \T1/lmr/m/n/10.95 [[][]$\T1/lmtt/m/n/10.95 https : / / dev . epicgames . com / documentation /
  []
 
 
-Overfull \hbox (6.1594pt too wide) in paragraph at lines 98--98
+Overfull \hbox (11.63438pt too wide) in paragraph at lines 102--102
 []\T1/lmr/m/n/10.95 EPIC GA-MES. \T1/lmr/m/it/10.95 AI Per-cep-tion in Unreal En-gine \T1/lmr/m/n/10.95 [[][]$\T1/lmtt/m/n/10.95 https : / / dev . epicgames . com / documentation /
  []
 
 (Chapters/8_Appendix1.tex
-<Figures/behavior_tree.png, id=596, 1284.29813pt x 581.17125pt>
+<Figures/behavior_tree.png, id=625, 1284.29813pt x 581.17125pt>
 File: Figures/behavior_tree.png Graphic file (type png)
 <use Figures/behavior_tree.png>
 Package pdftex.def Info: Figures/behavior_tree.png  used on input line 3.
 (pdftex.def)             Requested size: 625.24327pt x 282.94073pt.
-) (Chapters/9_Appendix2.tex [44
+) (Chapters/9_Appendix2.tex [46
 
-] [45 <./Figures/behavior_tree.png>]
+] [47 <./Figures/behavior_tree.png>]
 P\v {r}\'{\i }loha A.
-) [46
+) [48
 
 ] (BachelorThesis.aux)
  ***********
@@ -2277,23 +2274,23 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `BachelorThesis.out' has not changed.
-(rerunfilecheck)             Checksum: 8CEEAAA98EE96695FFE5EC3C859D7AFD;7718.
+(rerunfilecheck)             Checksum: 927E16BBD4481CB30234E6FE27AB2E28;8071.
 Package logreq Info: Writing requests to 'BachelorThesis.run.xml'.
 \openout1 = `BachelorThesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 52002 strings out of 467867
- 1086052 string characters out of 5418335
- 1911836 words of memory out of 5000000
- 79966 multiletter control sequences out of 15000+600000
+ 52026 strings out of 467867
+ 1086349 string characters out of 5418335
+ 1911983 words of memory out of 5000000
+ 79975 multiletter control sequences out of 15000+600000
  704788 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 135i,17n,127p,1677b,3884s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 135i,17n,127p,1671b,3884s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss17.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/krato/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on BachelorThesis.pdf (46 pages, 3270003 bytes).
+Output written on BachelorThesis.pdf (48 pages, 3280542 bytes).
 PDF statistics:
- 704 PDF objects out of 1000 (max. 8388607)
- 131 named destinations out of 1000 (max. 500000)
- 424 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 737 PDF objects out of 1000 (max. 8388607)
+ 146 named destinations out of 1000 (max. 500000)
+ 432 words of extra memory for PDF output out of 10000 (max. 10000000)
 

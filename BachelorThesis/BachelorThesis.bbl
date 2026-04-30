@@ -83,6 +83,39 @@
       \field{title}{Game Development Patterns with Unreal Engine 5: Build Maintainable and Scalable Systems with C++ and Blueprint}
       \field{year}{2023}
     \endentry
+    \entry{millington2006}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=503d3d26ec6cb51d31d8013bf13acc0b}{%
+           family={Millington},
+           familyi={M\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {San Francisco}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann}%
+      }
+      \strng{namehash}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \strng{fullhash}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \strng{fullhashraw}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \strng{bibnamehash}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \strng{authorbibnamehash}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \strng{authornamehash}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \strng{authorfullhash}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \strng{authorfullhashraw}{503d3d26ec6cb51d31d8013bf13acc0b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-12-497782-2}
+      \field{series}{The Morgan Kaufmann Series in Interactive 3D Technology}
+      \field{title}{Artificial Intelligence for Games}
+      \field{year}{2006}
+      \field{pages}{896}
+      \range{pages}{1}
+    \endentry
     \entry{gregory2018}{book}{}{}
       \name{author}{1}{}{%
         {{hash=b97f772b60bfb5bf77251b45263e44dd}{%
@@ -102,8 +135,8 @@
       \strng{authornamehash}{b97f772b60bfb5bf77251b45263e44dd}
       \strng{authorfullhash}{b97f772b60bfb5bf77251b45263e44dd}
       \strng{authorfullhashraw}{b97f772b60bfb5bf77251b45263e44dd}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3rd}
@@ -125,8 +158,8 @@
       \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
       \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
       \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://dev.epicgames.com/documentation/unreal-engine/gameplay-systems-in-unreal-engine}}
@@ -149,8 +182,8 @@
       \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
       \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
       \field{extraname}{2}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://dev.epicgames.com/documentation/unreal-engine/pawn-in-unreal-engine?application_version=5.0}}
@@ -173,8 +206,8 @@
       \strng{authorfullhash}{f74dc6a40e6ed3e07e99f3e972a5394a}
       \strng{authorfullhashraw}{f74dc6a40e6ed3e07e99f3e972a5394a}
       \field{extraname}{3}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://dev.epicgames.com/documentation/unreal-engine/controllers-in-unreal-engine?application_version=5.0}}

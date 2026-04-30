@@ -259,3 +259,62 @@ Behaviorální strom také vyžaduje průběžné vyhodnocování podmínek.
 U menšího počtu postav to obvykle nepředstavuje problém, ale u většího množství agentů nebo složitějších podmínek může být nutné řešit výkon. 
 Při návrhu stromu je proto vhodné zvážit, které kontroly je nutné provádět často a které lze vyhodnocovat méně pravidelně.\cite[s.~42]{colledanchise2018}
 
+\section{Srovnání s jinými technikami implementace chování NPC}
+
+Behaviorální stromy nejsou ani zdaleka jedinou metodou řízení chování autonomních agentů.
+V této sekci budou představeny a porovnány behaviorální stromy se dvěma alternativními přístupy, které jsou používány v~herním vývoji.
+Jedná se o konečné automaty (\textit{FSM}) a~systémy založenými na hodnotě užitku (\textit{Utility-based system}).
+
+
+\subsection{Konečné automaty}
+
+Konečný automat (Finite State Machine, zkráceně FSM) je historicky nejrozšířenější přístup k~implementaci chování NPC. 
+Agent se v~každém okamžiku nachází v~jednom z~předem definovaných stavů a~přechází mezi nimi na základě podmínek, které jsou průběžně vyhodnocovány.~\cite[s.~318]{millington2006}. 
+Pro jednoduché NPC, kterému stačí pár stavů pro jeho věrohodnou implementaci chování, FSM bohatě stačí.
+Asi nejlepším příkladem takových NPC jsou obecně zvířata.
+
+Hlavním omezením FSM je škálovatelnost kvůli tomu, že s~rostoucím počtem stavů roste i~počet nutných přechodů mezi nimi. 
+Každý nový stav tak může vyžadovat definování přechodů ze všech stavů ostatních. 
+Tento jev je označován jako problém exploze stavů~\cite[s.~5]{colledanchise2018}. 
+Další nevýhodou je obtížná znovupoužitelnost, protože chování navržené pro jednoho agenta 
+lze jen těžko přenést na jiného agenta s~odlišnou sadou stavů.
+
+V~kontextu implementovaného systému by použití FSM vedlo k~výraznému nárůstu počtu přechodů mezi stavy, zejména při kombinaci percepce, hlídkování 
+a~interakcí s~objekty. 
+Takový model by byl obtížně rozšiřitelný a~méně přehledný při ladění chování.
+
+Behaviorální stromy tento problém řeší hierarchickým uspořádáním chování do větví. 
+Dílčí chování jsou izolována do samostatných podstromů, které lze sdílet mezi různými agenty nebo opakovaně skládat do komplexnějšího chování. 
+Přidání nového chování nevyžaduje úpravu existujících přechodů, ale pouze přidání nové větve do stromu. 
+Z~těchto důvodů jsou behaviorální stromy považovány za přirozenou náhradu FSM v~situacích, kdy počet chování přesáhne několik málo stavů~\cite[s.~5]{colledanchise2018}.
+
+\subsection{Systémy založené na hodnotě užitku}
+
+Systémy založené na hodnotě užitku (utility-based systems) přiřazují každé
+dostupné akci číselné skóre vyjadřující její vhodnost v~dané situaci. 
+Agent nejčastěji vykoná akci s~nejvyšším skóre~\cite[s.~379]{millington2006}. 
+Hodnota akce se typicky počítá jako vážená kombinace více faktorů. 
+Například vzdálenosti od hráče, úrovně zdraví agenta nebo dostupnosti předmětů v~prostředí.
+
+Výhodou tohoto přístupu je plynulý a~přirozený výběr chování. Agent nepřepíná diskrétně mezi stavy, ale průběžně reaguje 
+na jemné změny situace. Pro simulace, kde je žádoucí, aby NPC působila organicky a~ne mechanicky předvídatelně, může být tato vlastnost přínosem.
+
+Nevýhodou je obtížnost návrhu a~ladění. Správné nastavení vah a~hodnotících funkcí pro každou kombinaci faktorů vyžaduje opakované testování. 
+Výsledné chování nevyplývá z~přehledné struktury, ale z~numerického výpočtu, jehož průběh je těžší sledovat a~opravovat.
+
+V~případě implementovaného systému by bylo nutné definovat hodnotící funkce pro kombinaci 
+více faktorů (např. vzdálenost hráče, slyšitelnost nebo dostupnost interakcí), což by výrazně zkomplikovalo ladění chování
+bez zřejmého přínosu oproti explicitní hierarchii behaviorálního stromu.
+
+Oproti tomu behaviorální strom dává návrháři explicitní kontrolu nad prioritou chování. 
+Strukturou větví přímo určuje, co má přednost a za jakých podmínek, bez nutnosti kalibrovat numerické váhy.
+
+\subsection{Zhodnocení}
+
+Oproti FSM poskytují behaviorální stromy lepší škálovatelnost a~přehlednost při rostoucí komplexitě chování. 
+Ve srovnání se systémy založenými na hodnotě užitku umožňují explicitní řízení priorit a~jednodušší ladění bez nutnosti 
+definování numerických hodnotících funkcí.
+
+Zvolený přístup se ukázal jako vhodný zejména pro implementaci hierarchického chování NPC, kde jednotlivé 
+stavy (\texttt{Passive}, \texttt{Investigating}, \texttt{Attacking}) a~jejich přechody 
+přirozeně odpovídají struktuře behaviorálního stromu.

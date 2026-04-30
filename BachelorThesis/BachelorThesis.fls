@@ -1,6 +1,6 @@
-PWD c:\Users\krato\OneDrive\Plocha\final\bachelor_thesis\BachelorThesis
+PWD c:\Users\krato\OneDrive\Plocha\bachelor_thesis\BachelorThesis
 INPUT C:\Users\krato\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\krato\OneDrive\Plocha\final\bachelor_thesis\BachelorThesis\BachelorThesis.tex
+INPUT c:\Users\krato\OneDrive\Plocha\bachelor_thesis\BachelorThesis\BachelorThesis.tex
 OUTPUT BachelorThesis.log
 INPUT .\diploma.cls
 INPUT diploma.cls

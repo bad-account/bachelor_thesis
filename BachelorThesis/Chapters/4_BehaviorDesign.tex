@@ -105,7 +105,7 @@ Celý behaviorální strom je příliš obsáhlý na to, aby jej bylo možné zo
 \subsection{Větev Passive}
 
 Pasivní větev je nejkomplexnější částí stromu a implementuje hlídkovou rutinu NPC. 
-Obsahuje jak Services, které běží periodicky na pozadí, tak Tasks vykonávané sekvenčně:
+Obsahuje jak služby (services), které běží periodicky na pozadí, tak úlohy (tasks) vykonávané sekvenčně:
 
 \begin{itemize}
     \item \texttt{BTS\_EnsurePatrolRoute} (Service) -- periodicky kontroluje, zda má NPC přiřazenou hlídkovou trasu; pokud ne, vyžádá ji od správce tras \texttt{BP\_RoutingManager},
@@ -132,7 +132,7 @@ Poté nastaví AI focus na cíl, přepne NPC do běhu a zahájí útočnou anima
 
 \subsection{Větev Investigating}
 
-Vyšetřovací větev je nejjednodušší ze tří. NPC naviguje na souřadnici uloženou v Blackboardu pod klíčem \texttt{PointOfInterest}. 
+Vyšetřovací větev je nejjednodušší ze všech tří. NPC naviguje na souřadnici uloženou v Blackboardu pod klíčem \texttt{PointOfInterest}. 
 Po dosažení cílové pozice, nebo pokud cíle nelze dosáhnout, stav automaticky přejde zpět do \texttt{Passive} a NPC pokračuje v hlídkování. 
 Tato větev se aktivuje při detekci zvuku nebo při zjištění pohybu sledovaného předmětu.
 
@@ -168,7 +168,7 @@ Práh pro toto rozhodnutí je po každé změně rovněž randomizován v rozsah
 \section{Reprezentace znalostí NPC}
 
 Chování NPC v této práci vyžaduje, aby postavy dokázaly pracovat s informacemi o objektech v herním prostředí. 
-Nejedná se pouze o okamžitou reakci na podněty, ale také o schopnost zohlednit stav světa při rozhodování.
+Nejedná se pouze o okamžitou reakci na podněty, ale také o schopnost zohlednit stav herního světa při rozhodování.
 
 Znalosti NPC jsou reprezentovány kombinací globálního sdíleného stavu a lokálních dat jednotlivých postav.
 
@@ -224,12 +224,12 @@ Nakonec obě hodnoty porovná.
 
 Pokud jsou pozice shodné, předmět nebyl přemístěn a NPC pokračují v hlídce. 
 Pokud se pozice liší, byl předmět přemístěn hráčem. 
-V takovém případě jsou u obou NPC nastaveny Blackboard klíče \texttt{LostItem?} na hodnotu \texttt{true} a \texttt{SearchShed} na hodnotu \texttt{true}, čímž jsou 
-obě postavy instruovány k prohledání určitého místa. Zápis do Blackboardu druhého NPC probíhá přímým přístupem přes jeho AI Controller, bez použití centrálního 
-koordinátora.
+V takovém případě jsou u obou NPC nastaveny Blackboard klíče \texttt{LostItem} a \texttt{SearchShed} na hodnotu \texttt{true}, čímž jsou 
+obě postavy instruovány k prohledání určitého místa. 
+Zápis do Blackboardu druhého NPC probíhá přímým přístupem přes jeho AI Controller, bez použití centrálního koordinátora.
 
-Jedná se o decentralizovaný mechanismus spolupráce: každé NPC si informace aktivně zjišťuje při každém setkání s partnerem 
-a v případě nesouladu koordinovaně zahájí vyšetřování. 
+Jedná se o decentralizovaný mechanismus spolupráce, což znamená, že každé NPC si informace aktivně zjišťuje 
+při každém setkání s partnerem a v případě nesouladu koordinovaně zahájí vyšetřování. 
 Tím je naplněn požadavek na implementaci spolupráce mezi NPC postavami.
 
 \section{Reakce na hráče a prostředí}
